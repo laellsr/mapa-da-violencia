@@ -100,7 +100,7 @@ Julius Martins Lira de Albuquerque
 [jmla@ic.ufal.br](mailto:jmla@ic.ufal.br)
 
 Lael de Lima Santa Rosa
-[llsr@hotmail.com](mailto:llsr@hotmail.com)
+[llsr@hotmail.com](mailto:llsr@ic.ufal.br)
 
 Matheus Feitosa Ramos
 [mfr@ic.ufal.br](mailto:mfr@ic.ufal.br)
