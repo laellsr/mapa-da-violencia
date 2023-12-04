@@ -55,12 +55,21 @@ Acreditamos que esse `Marco 1` vai conseguir `resultado esperado`. Saberemos que
 
 ## Riscos
 
-1. **Risco 1** descrição do risco. *Severidade Baixa e Probabilidade Alta*.
+1. **Risco 1** Propagação de Fake News. 
+    Severidade Média e Probabilidade Alta.*
     
     Ações para mitigação do risco:
     
     - Ação de mitigação 1.1.
-2. **Risco 2** descrição do risco. *Severidade Média e Probabilidade Alta*.
+2. **Risco 2** Uso indevido do sistema por parte de criminosos. 
+    Severidade Alta e Probabilidade Média.*
+    
+    Ações para mitigação do risco:
+    
+    - Ação de mitigação 2.1.
+    - Ação de mitigação 2.2.
+3. **Risco 3** Atratividade/Interesse baixa(o) do sistema pelos stakeholders. 
+    Severidade Alta e Probabilidade Alta.*
     
     Ações para mitigação do risco:
     
@@ -81,15 +90,10 @@ Acreditamos que esse `Marco 1` vai conseguir `resultado esperado`. Saberemos que
 
 ## Stakeholders
 
-Stakeholder 1 <br />
-*Key User - Cargo na Empresa X* <br />
-*E-mail* <br />
-(xx) xxxxx-xxxx
-
-Stakeholder 2 <br />
-*Key User - Cargo na Empresa X* <br />
-*E-mail* <br />
-(xx) xxxxx-xxxx
+- Cidadãos em Geral;
+- Governos Locais;
+- Turistas de outras cidades, estados, países;
+- Empresas de Hotelaria e Turismo.
 
 ## Equipe
 
