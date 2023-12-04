@@ -107,7 +107,7 @@ Matheus Feitosa Ramos
 [mfr@ic.ufal.br](mailto:mfr@ic.ufal.br)
 
 Victor Ferro Sousa Monteiro
-[https://github.com/edgebr](https://github.com/edgebr)
+[vfsm@ic.ufal.br](mailto:vfsm@ic.ufal.br)
 
 ## Status Reports
 
