@@ -4,13 +4,13 @@ O turista pode acabar entrando ocasionalmente numa área perigosa da cidade em q
 
 O Mapa da Violência é uma aplicação voltada para a segurança pública que tem o intuito de produzir dados geográficos sobre a violência de forma geral e filtrá-los por crime, por data e horário; diferentemente do [Fogo Cruzado](https://fogocruzado.org.br/) que é voltado a tiroteios e do [Crime Watch Crime Map](https://play.google.com/store/apps/details?id=com.fullersoftware.crime&hl=pt_BR&gl=US) que não possui filtros temporais.
 
-### Problemas
+## Problemas
 
 1. Não ser possível prever os possíveis locais seguros de uma região sem o conhecimento do morador local.
 2. Não é possível escolher o lugar mais seguro para morar pois os dados de crimes não estão facilmente acessíveis.
 3. Não é possível saber quantos e quais crimes ocorreram em determinada região em determinada data de forma fácil e de visibilidade intuitiva.
 
-### Expectativas
+## Expectativas
 
 1. Ele(a) espera avaliar quais perigos um lugar pode apresenta e quais os piores momentos(Horários e períodos)
 2. Identificar os crimes em determinada região em um aplicativo de mapa.
