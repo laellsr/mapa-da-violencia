@@ -12,9 +12,9 @@ O Mapa da Violência é uma aplicação voltada para a segurança pública que t
 
 ## Expectativas
 
-1. Ele(a) espera avaliar quais perigos um lugar pode apresenta e quais os piores momentos(Horários e períodos)
-2. Identificar os crimes em determinada região em um aplicativo de mapa.
-3. Filtrar os dados por crime e/ou data.
+1. Ele(a) espera avaliar quais perigos um lugar pode apresenta e quais os piores horários do dia para tomar decisões como: não sair com joais, celular ou carteiras a vista; não sair com a família ou evitar passar no local; andar ou não com as janelas do automóvel levantas.   
+2. Identificar os crimes de um local em um aplicativo de mapa.
+3. Monitorar a violência de uma determinada região, filtrando os dados por tipo de crime e/ou por data.
 
 ## Personas
 
@@ -23,12 +23,6 @@ O Mapa da Violência é uma aplicação voltada para a segurança pública que t
 O turista, quando quer conhecer um novo local, procura informações sobre ele na internet, mais precisamente numa busca pelo Google. Ele se empenha em conhecer a beleza do ambiente, a gastronomia e a cultura local junto também com as possíveis dificuldades para poder acessá-las, entre elas, a violência. 
 
 O excesso de violência pode decidir suas ações no local, como ser muito cuidadoso com seus bens, com o horário ou até decisões extremas como evitar o acesso temendo sua própria vida. Seu sexo também vai fazer parte dessa decisão. Sair com ou sem o celular, o automóvel, as joias. Ele ou ela espera prever quais perigos um lugar pode apresentar: furtos, assaltos, sequestros e/ou estupros.
-
-Ele gostaria de avaliar:
-
-1. Se pode sair durante determinado horário.
-2. Se pode usar algum bem material, como o celular, joias ou automóveis, de forma despreocupada ou se existem restrições, como a necessidade das janelas abaixadas, celulares e joias não à vista.
-3. Se deveria evitar andar a pé e/ou com a família.
 
 ### Morador local
 
