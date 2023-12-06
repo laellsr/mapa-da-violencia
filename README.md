@@ -12,8 +12,9 @@ O Mapa da Violência é uma aplicação voltada para a segurança pública que t
 
 ### Expectativas
 
-1. Identificar os crimes em determinada região em um aplicativo de mapa.
-2. Filtrar os dados por crime e/ou data.
+1. Ele(a) espera avaliar quais perigos um lugar pode apresenta e quais os piores momentos(Horários e períodos)
+2. Identificar os crimes em determinada região em um aplicativo de mapa.
+3. Filtrar os dados por crime e/ou data.
 
 ## Personas
 
@@ -29,64 +30,52 @@ O morador local tem expectativas de morar em outro bairro, porém, ele não gost
 
 ## Marcos
 
-### Marco 1
+### Marco 1 - Design - Figma 18/12/23
 
-Acreditamos que esse `Marco 1` vai conseguir `resultado esperado`. Saberemos que isso aconteceu com base em `métricas para validar a hipótese do negócio`.
+Fase de prototipagem: demonstração e mapeamento do fluxo de telas.
 
-### Funcionalidades
+### Marco 2 - Apresentação do mapa  
 
-- [x]  Funcionalidade 1.
-- [x]  Funcionalidade 2.
-- [x]  Funcionalidade 3.
-
-[Release Notes](https://www.notion.so/release_notes_1.md)
-
-### Marco 2 - 20/01/2023
-
-Acreditamos que esse `Marco 1` vai conseguir `resultado esperado`. Saberemos que isso aconteceu com base em `métricas para validar a hipótese do negócio`.
+Será apresentado o mapa com as suas principais métricas e componentes visuais.
 
 ### Funcionalidades
 
-- [x]  Funcionalidade 1.
-- [x]  Funcionalidade 2.
-- [ ]  Funcionalidade 3.
+- [ ] Navegar pelo Mapa.
+- [ ] Realizar Denúncias
+- [ ] Marcadores Visuais no Mapa dos Tipos Diferentes de Crimes.
+- [ ] Popup com as estatísticas da região
 
-[Release Notes](https://www.notion.so/release_notes_1.md)
+### Marco 3 - Descrição das Denúncias Realizadas  
+
+Mostrar as informações: Tipo do crime, dia e horário da ocorrência, localidade, dados adicionais do ocorrido
+
+### Funcionalidades
+
+- [ ] Lista de Crimes Linkados ao Mapa.
+      
+### Marco 4 - Login, Cadastro
+
+Será efetuado a parte de acesso ao sistema do usuário bem como as ações de mitigação aos riscos enumerados.
+
+### Funcionalidades
+
+- [ ] Sistema de Cadastro.
+- [ ]  Limite de dois relatos por mês.
 
 ## Riscos
 
-1. **Risco 1** Propagação de Fake News. 
+1. **Risco 1** Propagação de denúncias falsas. Um usuário mal intencionado ou não, pode destruir a reputação de algum local ou região, criando assim denúncias falsas.
     
-    **Severidade Média e Probabilidade Alta.**
-    
-    Ações para mitigação do risco:
-    
-    - Ação de mitigação 1.1.
-2. **Risco 2** Uso indevido do sistema por parte de criminosos. 
-
-    **Severidade Alta e Probabilidade Média.**
-    
-    Ações para mitigação do risco:
-    
-    - Ação de mitigação 2.1.
-    - Ação de mitigação 2.2.
-3. **Risco 3** Atratividade/Interesse baixa(o) do sistema pelos stakeholders. 
-
     **Severidade Alta e Probabilidade Alta.**
     
     Ações para mitigação do risco:
     
-    - Ação de mitigação 3.1.
-    - Ação de mitigação 3.2.
+    - Um CPF por cadastro diminui a possibilidade que ele tem de criar usuários falsos com esse fim.
+    - Limitar os relatos a dois por mês, impede que o usuário inunde o sistema.
 
 ## Componentes
 
 ### Aplicativo Web
-
-[descrição breve]
-[https://github.com/edgebr/templates-artefatos](https://github.com/edgebr/templates-artefatos)
-
-### Aplicativo Mobile
 
 [descrição breve]
 [https://github.com/edgebr/templates-artefatos](https://github.com/edgebr/templates-artefatos)
