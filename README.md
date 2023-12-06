@@ -24,6 +24,12 @@ O turista, quando quer conhecer um novo local, procura informações sobre ele n
 
 O excesso de violência pode decidir suas ações no local, como ser muito cuidadoso com seus bens, com o horário ou até decisões extremas como evitar o acesso temendo sua própria vida. Seu sexo também vai fazer parte dessa decisão. Sair com ou sem o celular, o automóvel, as joias. Ele ou ela espera prever quais perigos um lugar pode apresentar: furtos, assaltos, sequestros e/ou estupros.
 
+Ele gostaria de avaliar:
+
+1. Se pode sair durante determinado horário.
+2. Se pode usar algum bem material, como o celular, joias ou automóveis, de forma despreocupada ou se existem restrições, como a necessidade das janelas abaixadas, celulares e joias não à vista.
+3. Se deveria evitar andar a pé e/ou com a família.
+
 ### Morador local
 
 O morador local tem expectativas de morar em outro bairro, porém, ele não gostaria de se mudar para uma região mais perigosa da qual ele reside. Os dados que ele busca analisar não estão facilmente disponíveis em uma pesquisa simples no Google. Usando as palavras chaves “violência no bairro x”, onde x é o bairro da expectativa, aparece apenas notícias relacionadas a crimes no bairro e, apenas por isso, não é possível constatar ou medir a violência. Ele busca visualizar os dados de uma maneira mais fácil e de costume, como a apresentação do Google Maps, e deseja que as informações estejam atualizadas para poder realizar o comparativo e tomar sua decisão.
