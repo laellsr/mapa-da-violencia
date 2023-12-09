@@ -26,7 +26,7 @@ O excesso de violência pode decidir suas ações no local, como ser muito cuida
 
 ### Morador local
 
-O morador local tem expectativas de morar em outro bairro, porém, ele não gostaria de se mudar para uma região mais perigosa da qual ele reside. Os dados que ele busca analisar não estão facilmente disponíveis em uma pesquisa simples no Google. Usando as palavras chaves “violência no bairro x”, onde x é o bairro da expectativa, aparece apenas notícias relacionadas a crimes no bairro e, apenas por isso, não é possível constatar ou medir a violência. Ele busca visualizar os dados de uma maneira mais fácil e de costume, como a apresentação do Google Maps, e deseja que as informações estejam atualizadas para poder realizar o comparativo e tomar sua decisão.
+O morador local tem expectativas de morar em outro bairro, porém, ele não gostaria de se mudar para uma região mais perigosa da qual ele reside. Porém, os dados que ele busca analisar não estão facilmente disponíveis nos portais do governo, nem são acessados numa pesquisa simples no Google. Usando as palavras chaves “violência no bairro x”, onde x é o bairro da expectativa, aparece apenas notícias relacionadas a crimes no bairro e, apenas por isso, não é possível constatar ou medir a violência. Ele busca visualizar os dados de uma maneira mais fácil e de costume, como a apresentação do Google Maps, e deseja que as informações estejam atualizadas para poder realizar o comparativo e tomar sua decisão.
 
 ## Marcos
 
