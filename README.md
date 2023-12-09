@@ -54,7 +54,7 @@ Mostrar as informações: Tipo do crime, dia e horário da ocorrência, localida
       
 ### Marco 4 - 
 
-.
+Melhorar a acessibilidade ao sistema e proporcionar mais comodidade para o usuário.
 
 ### Funcionalidades
 
