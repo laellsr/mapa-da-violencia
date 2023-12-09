@@ -43,7 +43,6 @@ Será apresentado o mapa com as suas principais métricas e componentes visuais.
 - [ ] Navegar pelo Mapa.
 - [ ] Realizar Denúncias
 - [ ] Marcadores Visuais no Mapa dos Tipos Diferentes de Crimes.
-- [ ] Popup com as estatísticas da região
 
 ### Marco 3 - Descrição das Denúncias Realizadas  
 
@@ -53,14 +52,23 @@ Mostrar as informações: Tipo do crime, dia e horário da ocorrência, localida
 
 - [ ] Lista de Crimes Linkados ao Mapa.
       
-### Marco 4 - Login, Cadastro
+### Marco 4 - 
+
+Será efetuado a parte de acesso ao sistema do usuário bem como as ações de mitigação aos riscos enumerados.
+
+### Funcionalidades
+
+- [ ] Popup com as estatísticas da região.
+- [ ] Poder obter a localidade através da url de outro site do ramo de turismo.
+
+## Marco 5 - Login, Cadastro
 
 Será efetuado a parte de acesso ao sistema do usuário bem como as ações de mitigação aos riscos enumerados.
 
 ### Funcionalidades
 
 - [ ] Sistema de Cadastro.
-- [ ]  Limite de dois relatos por mês.
+- [ ] Limite de dois relatos por mês.
 
 ## Riscos
 
