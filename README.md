@@ -2,7 +2,7 @@
 
 O turista pode acabar entrando ocasionalmente numa área perigosa da cidade em que está de viagem; o morador de bairro pode querer medir o índice de violência da sua região ou daquela ao qual ele está disposto a se mudar. 
 
-O Mapa da Violência é uma aplicação voltada para a segurança pública que tem o intuito de produzir dados geográficos sobre a violência de forma geral e filtrá-los por crime, por data e horário; diferentemente do [Fogo Cruzado](https://fogocruzado.org.br/) que é voltado a tiroteios e do [Crime Watch Crime Map](https://play.google.com/store/apps/details?id=com.fullersoftware.crime&hl=pt_BR&gl=US) que não possui filtros temporais.
+O Mapa da Violência é uma aplicação voltada para a segurança pública que tem o intuito de coletar e exibir dados sobre a violência de forma geral, e exibi-los com a opção de filtrá-los por localização, tipo do crime, por data e horário; diferentemente do [Fogo Cruzado](https://fogocruzado.org.br/) que é voltado a tiroteios e do [Crime Watch Crime Map](https://play.google.com/store/apps/details?id=com.fullersoftware.crime&hl=pt_BR&gl=US) que não possui filtros temporais. 
 
 ## Problemas
 
