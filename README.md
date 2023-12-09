@@ -54,7 +54,7 @@ Mostrar as informações: Tipo do crime, dia e horário da ocorrência, localida
       
 ### Marco 4 - 
 
-Será efetuado a parte de acesso ao sistema do usuário bem como as ações de mitigação aos riscos enumerados.
+.
 
 ### Funcionalidades
 
