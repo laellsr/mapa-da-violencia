@@ -1,8 +1,16 @@
 @extends('_template')
 
+@push('styles')
+    <style>
+        body {
+            background:  linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%); height: 100vh;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div id="IndexContent" class="d-flex  flex-column justify-content-center align-items-center mt-5">
-        <img src="{{ asset('img/logo_coca.png') }}" class="logo mb-3">
+        <img src="{{ Vite::asset('resources/img/logo_coca.png') }}" class="logo mb-3">
         <div id="searchBar" class="mt-5 bg-white rounded shadow w-50" @mousedown.stop>
             <div class="rounded py-2 ">
                 <div class="d-flex justify-content-center align-items-center">

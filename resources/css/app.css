@@ -5,10 +5,6 @@
     z-index: 1;
 }
 
-#IndexContent {
-    background:  linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%); height: 100vh;
-}
-
 #SearchBar {
     /* width: 300px; */
     z-index: 1000;
