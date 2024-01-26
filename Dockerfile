@@ -17,4 +17,9 @@ RUN composer install --prefer-dist --no-interaction
 
 #ENTRYPOINT ["sh", "migrations.sh"]
 
-CMD ["php","artisan","serve","--host=0.0.0.0"]
+# CMD ["php","artisan","serve","--host=0.0.0.0"]
+
+
+COPY start.sh /docker/start.sh
+RUN chmod +x /docker/start.sh
+CMD ["/docker/start.sh"]
