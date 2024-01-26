@@ -20,5 +20,5 @@ RUN composer install --prefer-dist --no-interaction
 # CMD ["php","artisan","serve","--host=0.0.0.0"]
 
 
-RUN chmod +x /docker/start.sh
-CMD ["/docker/start.sh"]
+
+CMD ["./docker/start.sh"]
