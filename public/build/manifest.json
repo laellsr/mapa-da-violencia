@@ -1,0 +1,16 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-_NXIU245.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/img/logo_coca.png": {
+    "file": "assets/logo_coca-VmLVoovj.png",
+    "src": "resources/img/logo_coca.png"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-RYsC4yRG.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
