@@ -11,6 +11,8 @@ createApp({
         const currentLocation = ref({})
         const currentLocationGeometry = ref({})
         const currentLocationMarker = ref({})
+        /* OffCanvas */
+
         /* Map */
         const map = ref([])
         const zoomLevel = ref(14)
