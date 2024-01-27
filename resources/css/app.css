@@ -43,4 +43,5 @@ input:focus {
     bottom: 6px;
     left: 6px;
     width: 200px;
+    pointer-events: none;
 }
