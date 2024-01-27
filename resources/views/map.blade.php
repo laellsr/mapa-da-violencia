@@ -26,8 +26,26 @@
                     <li v-show="barFocus" v-for="(item, index) in recommendations" class="list-group-item border-0 shadow" v-html="item.display" @click="selectSearchBarItem(index)"></li>
                 </ul>
             </div>
-            <img class="map-logo" src="{{ Vite::asset('resources/img/logo_2.png') }}" draggable="false" alt="Safety Map - Percorra com segurança">
+            <img class="map-logo ms-3 mb-3" src="{{ Vite::asset('resources/img/logo_2.png') }}" draggable="false" alt="Safety Map - Percorra com segurança">
+            
+
+            <div v-if="currentLocation">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#LocationInfo" aria-controls="LocationInfo">Enable body scrolling</button>
+                <div class="offcanvas offcanvas-start h-75 ms-3 shadow rounded show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                    id="LocationInfo" aria-labelledby="LocationInfoLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="LocationInfoLabel" v-html="currentLocation.name"></h5><span class="text-black-50" v-html="currentLocation.country"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <p>Try scrolling the rest of the page to see this option in action.</p>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+        
     </div>
 @endsection
 
