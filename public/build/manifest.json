@@ -1,12 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-_NXIU245.css",
+    "file": "assets/app-0wLx6MW8.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
-  "resources/img/logo_coca.png": {
-    "file": "assets/logo_coca-VmLVoovj.png",
-    "src": "resources/img/logo_coca.png"
+  "resources/img/logo_1.png": {
+    "file": "assets/logo_1-Oa_QKidC.png",
+    "src": "resources/img/logo_1.png"
+  },
+  "resources/img/logo_2.png": {
+    "file": "assets/logo_2-zxK5DQv7.png",
+    "src": "resources/img/logo_2.png"
   },
   "resources/js/app.js": {
     "file": "assets/app-RYsC4yRG.js",
