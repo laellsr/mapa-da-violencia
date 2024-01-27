@@ -7,10 +7,9 @@
 
 @section('content')
     <section id="app">
-        <div id="map">
-        </div>
+        <div id="map"></div>
         <div id="boxes-layer">
-            <div id="SearchBar" class="mt-5 ms-5 ps-1 bg-white rounded shadow" @mousedown.stop>
+            <div id="SearchBar" class="mt-3 ms-3 ps-1 bg-white rounded shadow" @mousedown.stop>
                 <div class="rounded pt-1">
                     <div class="d-flex justify-content-center align-items-center">
                         <span class="ps-4 pe-2">
@@ -27,6 +26,7 @@
                     <li v-for="item in recommendations" class="list-group-item border-0 shadow" v-html="item.display" @click="fitBounds(item.boundingbox.map(Number))"></li>
                 </ul>
             </div>
+            <img class="map-logo" src="{{ Vite::asset('resources/img/logo_2.png') }}" alt="Safety Map - Percorra com segurança">
         </div>
     </section>
 @endsection
