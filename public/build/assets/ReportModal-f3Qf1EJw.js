@@ -1,0 +1,2 @@
+const n=document.getElementById("report_form"),a=e=>new Map(JSON.parse(localStorage.getItem(e))),s=(e,o,r,t)=>{try{e.get(r).push(t),console.log("GET")}catch{e.set(r,[t]),console.log("SET")}localStorage.setItem(o,JSON.stringify(Array.from(e.entries())))};n.addEventListener("submit",e=>{e.preventDefault();let o=document.getElementById("reportType").value,r=document.getElementById("cepForm").value,t="reportForm",l=a(t);s(l,t,o,r),alert(`Denuncia enviada!
+`),n.reset()});
