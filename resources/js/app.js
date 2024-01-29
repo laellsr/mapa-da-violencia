@@ -1,6 +1,4 @@
-import './bootstrap';
-// import './components/MapSearchBar';
-// import './components/ReportModal';
+import './bootstrap'
 
 import.meta.glob([
     '../img/**'

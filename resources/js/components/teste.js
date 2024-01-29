@@ -1,8 +1,8 @@
 export function setMockeMarkers(map,L){
-    var assetUrl=document.getElementById("assetUrl").value
+    // var assetUrl=document.getElementById("assetUrl").value
     
     var medium_risk = L.icon({
-        iconUrl: assetUrl+"medium_risk.png",
+        iconUrl: new URL('../../img/medium_risk.png', import.meta.url).href,
         iconSize:     [40, 60], 
         shadowSize:   [50, 64], 
         iconAnchor:   [20, 60], 
@@ -11,7 +11,7 @@ export function setMockeMarkers(map,L){
     });
 
     var high_danger = L.icon({
-        iconUrl: assetUrl+"high_danger.png",
+        iconUrl: new URL('../../img/high_danger.png', import.meta.url).href,
         iconSize:     [40, 60], 
         shadowSize:   [50, 64], 
         iconAnchor:   [20, 60], 
@@ -20,7 +20,7 @@ export function setMockeMarkers(map,L){
     });
 
     var gun = L.icon({
-        iconUrl: assetUrl+"gun.png",
+        iconUrl: new URL('../../img/gun.png', import.meta.url).href,
         iconSize:     [40, 60], 
         shadowSize:   [50, 64], 
         iconAnchor:   [20, 60], 
@@ -29,7 +29,7 @@ export function setMockeMarkers(map,L){
     });
 
     var murder = L.icon({
-        iconUrl: assetUrl+"murder.png",
+        iconUrl: new URL('../../img/murder.png', import.meta.url).href,
         iconSize:     [40, 60], 
         shadowSize:   [50, 64], 
         iconAnchor:   [20, 60], 

@@ -81,6 +81,7 @@ createApp({
             drawCurrentLocationGeometry()
             drawCurrentLocationMarker()
             fitCurrentLocationBounds()
+            new bootstrap.Offcanvas('#LocationInfo').show()
         }
 
         function drawCurrentLocationGeometry() {
@@ -112,6 +113,7 @@ createApp({
             query, 
             recommendations,
             barFocus,
+            currentLocation,
             selectSearchBarItem
         }
     }

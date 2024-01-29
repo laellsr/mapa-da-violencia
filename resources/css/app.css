@@ -6,7 +6,8 @@
 }
 
 #SearchBar {
-    z-index: 1000;
+    z-index: 1046;
+    position: fixed;
 }
 
 #boxes-layer {
@@ -17,6 +18,10 @@
 }
 
 #LocationInfo {
+    margin-top: 6rem;
+}
+
+#LocationBtn {
     margin-top: 6rem;
 }
 

@@ -1,12 +1,18 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-8JykoBfn.css",
+    "file": "assets/app-qqovLu0j.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
-  "resources/img/Group 4.png": {
-    "file": "assets/Group 4-tlFDIjrO.png",
-    "src": "resources/img/Group 4.png"
+  "resources/css/register.css": {
+    "file": "assets/register-VsOOI5bm.css",
+    "isEntry": true,
+    "src": "resources/css/register.css"
+  },
+  "resources/css/reportModal.css": {
+    "file": "assets/reportModal-dkv-7uVW.css",
+    "isEntry": true,
+    "src": "resources/css/reportModal.css"
   },
   "resources/img/gun.png": {
     "file": "assets/gun-e6pOFlTz.png",
@@ -28,9 +34,39 @@
     "file": "assets/medium_risk-eGVVO0mf.png",
     "src": "resources/img/medium_risk.png"
   },
+  "resources/img/murder.png": {
+    "file": "assets/murder-tlFDIjrO.png",
+    "src": "resources/img/murder.png"
+  },
   "resources/js/app.js": {
     "file": "assets/app-gkggixxs.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/components/MapSearchBar.js": {
+    "assets": [
+      "assets/medium_risk-eGVVO0mf.png",
+      "assets/high_danger-EreEzYfv.png",
+      "assets/gun-e6pOFlTz.png",
+      "assets/murder-tlFDIjrO.png"
+    ],
+    "file": "assets/MapSearchBar-s3UKLefe.js",
+    "isEntry": true,
+    "src": "resources/js/components/MapSearchBar.js"
+  },
+  "resources/js/components/Register.js": {
+    "file": "assets/Register-OKweDmaT.js",
+    "isEntry": true,
+    "src": "resources/js/components/Register.js"
+  },
+  "resources/js/components/ReportModal.js": {
+    "file": "assets/ReportModal-f3Qf1EJw.js",
+    "isEntry": true,
+    "src": "resources/js/components/ReportModal.js"
+  },
+  "resources/js/components/teste.js": {
+    "file": "assets/teste-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/js/components/teste.js"
   }
 }
