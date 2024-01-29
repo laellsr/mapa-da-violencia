@@ -45,6 +45,6 @@
         </div>
     </div>
     @push('scripts')
-        <script src="{{ Vite::asset('resources/js/components/register.js') }}" type="module"></script>
+        <script src="{{ Vite::asset('resources/js/components/Register.js') }}" type="module"></script>
     @endpush
 @endsection
