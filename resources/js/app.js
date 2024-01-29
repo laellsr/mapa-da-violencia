@@ -1,6 +1,6 @@
 import './bootstrap';
 import './components/MapSearchBar';
-console.log(import.meta.env.ASSET_URL,"url")
+import './components/ReportModal';
 
 import.meta.glob([
     '../img/**'
