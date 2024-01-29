@@ -1,6 +1,6 @@
 // import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
 import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-
+import { setMockeMarkers } from './teste'
 createApp({
     setup() {
         /* Search */
@@ -15,6 +15,7 @@ createApp({
 
         /* Map */
         const map = ref([])
+    
         const zoomLevel = ref(14)
         /* Abort Controller */
         let controller = new AbortController()
@@ -50,7 +51,7 @@ createApp({
 
         onMounted(() => {
             map.value = L.map('map', {zoomControl: false, attributionControl: false}).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map.value)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map.value)      
             // Zoom control interface
             L.control.zoom({position: 'bottomright'}).addTo(map.value)
             // Plugin to show user location
@@ -68,7 +69,10 @@ createApp({
                   maxZoom: 16, 
                 }
             }).addTo(map.value)
-        })
+        
+           setMockeMarkers(map,L)
+           
+        })    
 
         function selectSearchBarItem(index) {
             barFocus.value = false

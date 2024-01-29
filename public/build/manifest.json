@@ -12,8 +12,12 @@
     "file": "assets/logo_2-zxK5DQv7.png",
     "src": "resources/img/logo_2.png"
   },
+  "resources/img/police.png": {
+    "file": "assets/police-nkQBzhDl.png",
+    "src": "resources/img/police.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-gVMBg6Qb.js",
+    "file": "assets/app-S0L-P7rz.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
