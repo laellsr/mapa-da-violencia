@@ -51,7 +51,7 @@ createApp({
 
         onMounted(() => {
             map.value = L.map('map', {zoomControl: false, attributionControl: false}).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map.value)      
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map.value)         
             // Zoom control interface
             L.control.zoom({position: 'bottomright'}).addTo(map.value)
             // Plugin to show user location

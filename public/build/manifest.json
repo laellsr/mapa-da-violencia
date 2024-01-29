@@ -4,6 +4,18 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/img/Group 4.png": {
+    "file": "assets/Group 4-tlFDIjrO.png",
+    "src": "resources/img/Group 4.png"
+  },
+  "resources/img/gun.png": {
+    "file": "assets/gun-e6pOFlTz.png",
+    "src": "resources/img/gun.png"
+  },
+  "resources/img/high_danger.png": {
+    "file": "assets/high_danger-EreEzYfv.png",
+    "src": "resources/img/high_danger.png"
+  },
   "resources/img/logo_1.png": {
     "file": "assets/logo_1-Oa_QKidC.png",
     "src": "resources/img/logo_1.png"
@@ -12,12 +24,12 @@
     "file": "assets/logo_2-zxK5DQv7.png",
     "src": "resources/img/logo_2.png"
   },
-  "resources/img/police.png": {
-    "file": "assets/police-nkQBzhDl.png",
-    "src": "resources/img/police.png"
+  "resources/img/medium_risk.png": {
+    "file": "assets/medium_risk-eGVVO0mf.png",
+    "src": "resources/img/medium_risk.png"
   },
   "resources/js/app.js": {
-    "file": "assets/app-S0L-P7rz.js",
+    "file": "assets/app-gkggixxs.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
