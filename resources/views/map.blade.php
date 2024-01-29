@@ -47,10 +47,15 @@
         </div>
         
     </div>
+    <input type="hidden" id="assetUrl" value="{{Vite::asset('resources/img/')}}" >
 @endsection
 
 @push('scripts')
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
+          var map = L.map('map')
+      L.marker([-9.663136558749533, -35.71422457695007],).addTo(map);
+    </script>
+    <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8">
+    </script>
     <script src="{{ Vite::asset('resources/js/app.js') }}" type="module"></script>
 @endpush

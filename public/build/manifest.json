@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-mT-9a3sV.css",
+    "file": "assets/app-8JykoBfn.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -12,8 +12,12 @@
     "file": "assets/logo_2-zxK5DQv7.png",
     "src": "resources/img/logo_2.png"
   },
+  "resources/img/police.png": {
+    "file": "assets/police-nkQBzhDl.png",
+    "src": "resources/img/police.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-QdyPFGOE.js",
+    "file": "assets/app-S0L-P7rz.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
