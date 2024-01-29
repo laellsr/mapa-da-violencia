@@ -3,7 +3,7 @@
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-    <link rel="stylesheet" href="{{ Vite::asset('resources/css/modal.css') }}">
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/reportModal.css') }}">
 @endpush
 
 @section('content')
@@ -67,10 +67,10 @@
                             <label class="modal-title fs-2 fw-normal">Formulário de denúncia</label>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="send_ocorrencia" class="modal-body">
+                        <form id="report_form" class="modal-body">
                             <div class="mb-3 d-flex flex-row align-items-center">
                                 <label class="form-label fs-5 me-2">Tipo da ocorrência:</label>
-                                <select class="form-control w-auto" name="Tipo_ocorrencia" id="" required>
+                                <select class="form-control w-auto" name="Tipo_ocorrencia" id="reportType" required>
                                     <option value="" selected disabled>Selecione a ocorrência</option>
                                     <option value="at">Assalto</option>
                                     <option value="as">Assassinato</option>
@@ -157,4 +157,5 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     <script src="{{ Vite::asset('resources/js/app.js') }}" type="module"></script>
+    <script src="{{ Vite::asset('resources/js/components/reportModal.js') }}" type="module"></script>
 @endpush

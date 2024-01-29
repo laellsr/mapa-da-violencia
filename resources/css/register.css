@@ -1,0 +1,38 @@
+.home-logo{
+    width: 150%;
+    margin: 0 auto;
+    display: block;
+}
+
+.bg_gradient {
+    background:  linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%); 
+    height: 100dvh;
+}
+
+.container {
+    padding-top: 10%;
+}
+
+.panel {
+    box-sizing: border-box;
+}
+
+.leftpanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightpanel {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+#nameForm{
+    width: 300px;
+}
+
+#emailForm{
+    width: 300px;
+}
