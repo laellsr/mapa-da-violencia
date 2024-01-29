@@ -103,6 +103,10 @@
     </div>
 </div>
 
+@push('styles')
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/reportModal.css') }}">
+@endpush
+
 @push('scripts')
     <script src="{{ Vite::asset('resources/js/components/ReportModal.js') }}" type="module"></script>
 @endpush
