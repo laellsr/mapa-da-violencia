@@ -20,4 +20,7 @@
             <a class="btn btn-secondary px-3 text-uppercase fw-bolder" href="{{ route('map') }}">Acessar mapa</a>
         </div>
     </div>
+    <div class="d-flex justify-content-center mt-5">
+        <a class="btn btn-secondary px-3 text-uppercase fw-bolder" href="{{ route('register') }}">Cadastrar</a>
+    </div>
 @endsection

@@ -34,10 +34,11 @@
                                 <label class="me-2">Senha:</label>
                                 <input name="senha" required placeholder="Senha" type="password" class="form-control w-auto" id="passForm" aria-describedby="passForm">
                             </div>
-                        </div>   
-                        <div class="d-flex flex-row justify-content-center align-items-center text-center mb-1">
-                            <button type="submit" class="btn btn-primary btn-cadastro">Cadastrar</button>
                         </div>
+                        <div class="d-flex flex-row position-relative">
+                            <a onclick="window.location='{{ route('welcome') }}'" class="btn btn-secondary px-3 text-uppercase fw-bolder">Cancelar</a>
+                            <button type="submit" class="position-absolute btn btn-primary px-3 text-uppercase fw-bolder start-50 translate-middle-x">Cadastrar</button>
+                        </div> 
                     </form>
                 </div>
 
