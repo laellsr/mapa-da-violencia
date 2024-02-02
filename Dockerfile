@@ -4,7 +4,7 @@ RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interacti
 
 FROM php:8.2-apache-buster as dev
 
-ENV APP_ENV=dev
+ENV APP_ENV=production
 ENV APP_DEBUG=true
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
