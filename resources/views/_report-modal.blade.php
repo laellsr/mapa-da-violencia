@@ -37,9 +37,14 @@
                     <textarea required placeholder="O que aconteceu?" name="desc" id="desc" class="form-control" cols="80" rows="5"></textarea>
                 </div>
                 <div class="mb-3 d-flex flex-row align-items-center">
-                    <label class="form-label fs-5 me-2">Data do ocorrido:</label>
+                    <label class="form-label fs-5 m-2">Data:</label>
                     <input class="form-control w-auto" type="date" name="dt_ocorrencia" id="" required>
+
+                    <label class="form-label fs-5 m-2">Hora:</label>
+                    <input class="form-control w-auto" type="time" name="time_ocorrencia" id="" required>
                 </div>
+                <!-- Colocar Duas colunas para dividir, no lugar de linhas, e depois mais duas colunas de cada lado para alinhar os campos.
+                        Na versão mobile, tudo é linha -->
                 <div class="mb-3">
                     <label class="form-label fs-5 fw-normal">Local do crime:</label>
                     <div class="mb-3 d-md-flex flex-row align-items-center">
