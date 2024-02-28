@@ -18,8 +18,8 @@ return new class extends Migration
             $table->enum('osm_type', ['N', 'W', 'R']);
             $table->BigInteger('osm_id');
             $table->point('location');
-            $table->date('date_of_occurrence');
-            $table->time('time_of_occurrence');
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
         });
     }
