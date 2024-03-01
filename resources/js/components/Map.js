@@ -1,6 +1,6 @@
 // import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
 import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-import { setMockeMarkers } from './teste'
+import { setMockeMarkers } from './Marker'
 createApp({
     setup() {
         /* Search */
@@ -50,8 +50,22 @@ createApp({
         })
 
         onMounted(() => {
-            map.value = L.map('map', {zoomControl: false, attributionControl: false}).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map.value)         
+            // Create the layers
+            var layerGroupThreeMonths = L.layerGroup()
+            var layerCustomDate = L.layerGroup()
+            var homicidio = L.layerGroup([L.marker([-9.664, -35.701])])
+            var furto = L.layerGroup([L.marker([-9.664, -35.702])])
+            var roubo = L.layerGroup([L.marker([-9.664, -35.703])])
+            // Create the map
+            map.value = L.map('map', {
+                zoomControl: false, 
+                attributionControl: false,
+                layers: [layerGroupThreeMonths, homicidio, furto, roubo]
+            }).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
+            // Add the tile layer
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19
+            }).addTo(map.value)         
             // Zoom control interface
             L.control.zoom({position: 'bottomright'}).addTo(map.value)
             // Plugin to show user location
@@ -67,11 +81,26 @@ createApp({
                 },
                 locateOptions: {
                   maxZoom: 16, 
-                }
+                },
             }).addTo(map.value)
         
-           setMockeMarkers(map,L)
-           
+            setMockeMarkers(map,L)
+
+            // Add the layers control
+            var overlayMaps = {
+                "Homicídio": homicidio,
+                "Furto": furto,
+                "Roubo": roubo
+            }
+            var baseMaps = {
+                '<input type="date">': layerCustomDate,
+                "em até 3 meses": layerGroupThreeMonths
+            }
+            L.control.layers(baseMaps, overlayMaps, {
+                position: 'topright',
+                collapsed: false,
+                sortLayers: true
+            }).addTo(map.value)
         })    
 
         function selectSearchBarItem(index) {
