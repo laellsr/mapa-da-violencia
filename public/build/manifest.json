@@ -43,7 +43,7 @@
     "isEntry": true,
     "src": "resources/js/app.js"
   },
-  "resources/js/components/MapSearchBar.js": {
+  "resources/js/components/Map.js": {
     "assets": [
       "assets/medium_risk-eGVVO0mf.png",
       "assets/high_danger-EreEzYfv.png",
@@ -52,7 +52,7 @@
     ],
     "file": "assets/MapSearchBar-Rkqk6kb_.js",
     "isEntry": true,
-    "src": "resources/js/components/MapSearchBar.js"
+    "src": "resources/js/components/Map.js"
   },
   "resources/js/components/Register.js": {
     "file": "assets/Register-OKweDmaT.js",
