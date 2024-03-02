@@ -12,7 +12,7 @@ export default defineConfig({
                 'resources/js/components/Map.js',
                 'resources/js/components/Register.js',
                 'resources/js/components/ReportModal.js',
-                'resources/js/components/teste.js',
+                'resources/js/components/Marker.js',
             ],
             refresh: true,
         }),
