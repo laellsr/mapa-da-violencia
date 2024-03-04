@@ -60,11 +60,18 @@ createApp({
             map.value = L.map('map', {
                 zoomControl: false, 
                 attributionControl: false,
-                layers: [layerGroupThreeMonths, homicidio, furto, roubo]
+                layers: [layerGroupThreeMonths, homicidio, furto, roubo],
+                minZoom: 3,
+                maxZoom: 19,
+                maxBounds: L.latLngBounds([-90, -180], [90, 180]),
+                wraparound: true
+                // Do not show other worlds when dragging
+                
             }).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
             // Add the tile layer
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19
+                noWrap: true,
+                worldCopyJump: true
             }).addTo(map.value)         
             // Zoom control interface
             L.control.zoom({position: 'bottomright'}).addTo(map.value)
