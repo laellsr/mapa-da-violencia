@@ -18,8 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Router::prefix('reports')->group(function () {
-    Router::controller(ReportController::class)->group(function (){
+Route::prefix('reports')->group(function () {
+    Route::controller(ReportController::class)->group(function (){
         /* CRUD */
         Route::post('/', 'index');
         Route::post('/create', 'create');
@@ -31,8 +31,8 @@ Router::prefix('reports')->group(function () {
     });
 });
 
-Router::prefix('crimes')->group(function () {
-    Router::controller(CrimeController::class)->group(function (){
+Route::prefix('crimes')->group(function () {
+    Route::controller(CrimeController::class)->group(function (){
         /* CRUD */
         Route::post('/', 'index');
         Route::post('/create', 'create');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Crime;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 class CrimeController extends Controller
 {
@@ -12,7 +13,7 @@ class CrimeController extends Controller
      */
     public function index()
     {
-        //
+        return Crime::all();
     }
 
     /**
