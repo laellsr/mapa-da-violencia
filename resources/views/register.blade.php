@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row position-relative">
-                            <a onclick="window.location='{{ route('welcome') }}'" class="btn btn-secondary px-3 text-uppercase fw-bolder">Cancelar</a>
+                            <a href="{{ route('welcome') }}" class="btn btn-secondary px-3 text-uppercase fw-bolder">Cancelar</a>
                             <button type="submit" class="position-absolute btn btn-primary px-3 text-uppercase fw-bolder start-50 translate-middle-x">Cadastrar</button>
                         </div> 
                     </form>
