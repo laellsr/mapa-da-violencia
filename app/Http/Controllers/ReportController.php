@@ -12,7 +12,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return Report::all();
+        // dd(Report::all());
+        return response()->json(Report::all(), 200);
     }
 
     /**

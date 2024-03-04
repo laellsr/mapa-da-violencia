@@ -12,7 +12,7 @@ class CrimeController extends Controller
      */
     public function index()
     {
-        return Crime::all();
+        return response()->json(Crime::all(), 200);
     }
 
     /**

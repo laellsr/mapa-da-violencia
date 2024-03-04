@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('crime_id')->constrained('crimes');
             $table->enum('osm_type', ['N', 'W', 'R']);
             $table->BigInteger('osm_id');
-            $table->point('location');
+            $table->string('lat');
+            $table->string('lon');
             $table->date('date');
             $table->time('time');
             $table->timestamps();
