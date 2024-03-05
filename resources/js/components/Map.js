@@ -28,6 +28,11 @@ createApp({
         let controller = new AbortController()
         let signal = controller.signal
 
+        // escluir depois
+        const maceioCrimesData = ref([])
+        const maceioCrimesTotalData = ref(0)
+        const maceioCrimesLabelData = ref([])
+
         watch(query, (newVal) => {
             // Abort the previous request
             controller.abort()
@@ -73,12 +78,17 @@ createApp({
                         crime.reports.forEach(report => {
                             let marker = L.marker([Number(report.lat), Number(report.lon)])
                             // marker.bindPopup(report.description)
-                            markers.push(marker)
+                            markers.push(marker)    
                         })
                         // Add the layer group to the overlay layers
                         let layerGroup = L.layerGroup(markers)
                         overlayLayers.value[crime.name] = layerGroup
                         layersData.push(layerGroup)
+
+                        //excluir depois
+                        maceioCrimesData.value.push(markers.length)
+                        maceioCrimesLabelData.value.push(crime.name)
+                        maceioCrimesTotalData.value += markers.length
                     })
                 })
                 .catch(err => console.error(err))
@@ -126,6 +136,8 @@ createApp({
                 collapsed: false,
                 sortLayers: true
             }).addTo(map.value)
+
+
         })    
 
         function selectSearchBarItem(index) {
@@ -168,7 +180,12 @@ createApp({
             recommendations,
             barFocus,
             currentLocation,
-            selectSearchBarItem
+            selectSearchBarItem,
+
+
+            maceioCrimesData,
+            maceioCrimesTotalData,
+            maceioCrimesLabelData
         }
     }
 }).mount('#app')
