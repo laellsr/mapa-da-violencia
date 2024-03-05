@@ -1,22 +1,29 @@
 // import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
-import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+import { createApp, ref, watch, onMounted, toRaw } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import { setMockeMarkers } from './Marker'
 createApp({
     setup() {
+        /* Helpers */
+        const apiURL =  window.location.protocol + "//" + window.location.host + '/api/'
+        
         /* Search */
         const query = ref('')
         const barFocus = ref(false)
         const recommendations = ref([])
         const recommendationsSourceData = ref([])
+       
+        /* OffCanvas */
+        
+        /* Map */
+        const map = ref([])
+        const zoomLevel = ref(14)
+        const overlayLayers = ref([])
+        
+        /* App Data */
         const currentLocation = ref({})
         const currentLocationGeometry = ref({})
         const currentLocationMarker = ref({})
-        /* OffCanvas */
-
-        /* Map */
-        const map = ref([])
-    
-        const zoomLevel = ref(14)
+        
         /* Abort Controller */
         let controller = new AbortController()
         let signal = controller.signal
@@ -49,24 +56,42 @@ createApp({
                 })
         })
 
-        onMounted(() => {
-            // Create the layers
+        onMounted(async () => {
+            // Create the base layers
             var layerGroupThreeMonths = L.layerGroup()
             var layerCustomDate = L.layerGroup()
-            var homicidio = L.layerGroup([L.marker([-9.664, -35.701])])
-            var furto = L.layerGroup([L.marker([-9.664, -35.702])])
-            var roubo = L.layerGroup([L.marker([-9.664, -35.703])])
+            var layersData = []
+            layersData.push(layerGroupThreeMonths)
+            // Create the overlay layers and markers
+            await fetch(apiURL + 'reports/crimes')
+                .then(response => response.json())
+                .then(data => {
+                    // Create the layers
+                    data.forEach(crime => {
+                        // Add the markers
+                        let markers = []
+                        crime.reports.forEach(report => {
+                            let marker = L.marker([Number(report.lat), Number(report.lon)])
+                            // marker.bindPopup(report.description)
+                            markers.push(marker)
+                        })
+                        // Add the layer group to the overlay layers
+                        let layerGroup = L.layerGroup(markers)
+                        overlayLayers.value[crime.name] = layerGroup
+                        layersData.push(layerGroup)
+                    })
+                })
+                .catch(err => console.error(err))
             // Create the map
             map.value = L.map('map', {
                 zoomControl: false, 
                 attributionControl: false,
-                layers: [layerGroupThreeMonths, homicidio, furto, roubo],
+                layers: layersData,
                 minZoom: 3,
                 maxZoom: 19,
                 maxBounds: L.latLngBounds([-90, -180], [90, 180]),
                 wraparound: true
                 // Do not show other worlds when dragging
-                
             }).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
             // Add the tile layer
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -90,20 +115,13 @@ createApp({
                   maxZoom: 16, 
                 },
             }).addTo(map.value)
-        
             setMockeMarkers(map,L)
-
             // Add the layers control
-            var overlayMaps = {
-                "Homicídio": homicidio,
-                "Furto": furto,
-                "Roubo": roubo
-            }
             var baseMaps = {
                 '<input type="date">': layerCustomDate,
                 "em até 3 meses": layerGroupThreeMonths
             }
-            L.control.layers(baseMaps, overlayMaps, {
+            L.control.layers(baseMaps, toRaw(overlayLayers.value), {
                 position: 'topright',
                 collapsed: false,
                 sortLayers: true
