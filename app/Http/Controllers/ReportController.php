@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Crime;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -62,5 +63,15 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource by crimes.
+     */
+    public function index_by_crimes()
+    {
+        $crimes = Crime::has('reports')->with('reports')->get();
+
+        return response()->json($crimes, 200);
     }
 }
