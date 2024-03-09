@@ -47,60 +47,13 @@
                         Na versão mobile, tudo é linha -->
                 <div class="mb-3">
                     <label class="form-label fs-5 fw-normal">Local do crime:</label>
-                    <div class="mb-3 d-md-flex flex-row align-items-center">
-
-                        <label class="me-2">Rua:</label>
-                        <input required placeholder="nome da rua" type="text" class="form-control me-3" id="ruaForm" aria-describedby="ruaForm">
-                    
-                        <label class="me-2">Bairro:</label>
-                        <input required placeholder="nome do bairro" type="text" class="form-control w-auto me-3" id="bairroForm" aria-describedby="bairroForm">
-                        
-                    </div>
-                    <div class="mb-3 d-md-flex flex-row align-items-center">
-
-                        <label class="me-2">Cidade:</label>
-                        <input required placeholder="nome da cidade" type="text" class="form-control me-3" id="cidadeForm" aria-describedby="cidadeForm">
-                    
-                        <label class="me-2">Cep:</label>
-                        <input required placeholder="cep da rua" type="text" class="form-control w-auto" id="cepForm" aria-describedby="cepForm">
-
-                    </div>
-                    <div class="mb-3 d-md-flex flex-row align-items-center">
-                        <label class="me-2">Estado:</label>
-                        <select class="form-control w-auto" name="estado" id="estadoForm" required>
-                            <option value="" selected disabled>Selecione o estado</option>
-                            <option value="ac">Acre</option>
-                            <option value="al">Alagoas</option>
-                            <option value="ap">Amapá</option>
-                            <option value="am">Amazonas</option>
-                            <option value="ba">Bahia</option>
-                            <option value="ce">Ceará</option>
-                            <option value="df">Distrito Federal</option>
-                            <option value="es">Espírito Santo</option>
-                            <option value="go">Goiás</option>
-                            <option value="ma">Maranhão</option>
-                            <option value="mt">Mato Grosso</option>
-                            <option value="ms">Mato Grosso do Sul</option>
-                            <option value="mg">Minas Gerais</option>
-                            <option value="pa">Pará</option>
-                            <option value="pb">Paraíba</option>
-                            <option value="pr">Paraná</option>
-                            <option value="pe">Pernambuco</option>
-                            <option value="pi">Piauí</option>
-                            <option value="rj">Rio de Janeiro</option>
-                            <option value="rn">Rio Grande do Norte</option>
-                            <option value="rs">Rio Grande do Sul</option>
-                            <option value="ro">Rondônia</option>
-                            <option value="rr">Roraima</option>
-                            <option value="sc">Santa Catarina</option>
-                            <option value="sp">São Paulo</option>
-                            <option value="se">Sergipe</option>
-                            <option value="to">Tocantins</option>
-                        </select>
+                    <div>
+                        <!-- Implementação do novo sistema de busca de localização com base no de busca já realizado no mapa -->
+                         @include('_search-barModal')
                     </div>
                 </div>   
-                <div class="d-flex flex-row justify-content-center align-items-center text-center mb-1">
-                    <button type="reset" class="btn btn-reset me-2">Apagar</button>
+                <div class="d-flex flex-row justify-content-evenly align-items-center text-center mb-1">
+                    <button type="reset" class="btn btn-dark">Apagar</button>
                     <button type="submit" class="btn btn-primary btn-denunciar">Registrar</button>
                 </div>
             </form>
@@ -110,8 +63,4 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/reportModal.css') }}">
-@endpush
-
-@push('scripts')
-    <script src="{{ Vite::asset('resources/js/components/ReportModal.js') }}" type="module"></script>
 @endpush

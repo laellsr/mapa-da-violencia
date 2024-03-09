@@ -43,14 +43,5 @@ export function setMockeMarkers(map,L){
     L.marker([-9.659, -35.703],{icon:gun}).addTo(map.value);
     L.marker([-9.659, -35.704],{icon:medium_risk}).addTo(map.value);
     L.marker([-9.659, -35.705],{icon:murder}).addTo(map.value);
-    ///////
-
-    var heat = L.heatLayer([
-        [-9.659, -35.701,1], // lat, lng, intensity
-        [-9.659, -35.702,2],
-        [-9.659, -35.703,3],
-        [-9.659, -35.704,4],
-        [-9.659, -35.705,5],
-    ], {radius: 20}).addTo(map.value);
-   
+    ///////   
 }

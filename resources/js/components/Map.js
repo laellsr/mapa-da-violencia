@@ -11,6 +11,13 @@ createApp({
         const barFocus = ref(false)
         const recommendations = ref([])
         const recommendationsSourceData = ref([])
+
+        /* Search Modal */
+        const queryModal = ref('')
+        const barFocusModal = ref(false)
+        const recommendationsModal = ref([])
+        const recommendationsSourceDataModal = ref([])
+        const currentLocationModal = ref({})
        
         /* OffCanvas */
         
@@ -50,6 +57,34 @@ createApp({
                         let info = element.display_name.substring(commaIndex + 1).trim()
                         let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
                         recommendations.value.push({
+                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+                        })
+                    })
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Another error: ', err)
+                    }
+                })
+        })
+
+        watch(queryModal, (newVal) => {
+            // Abort the previous request
+            controller.abort()
+            // Create a new AbortController
+            controller = new AbortController()
+            signal = controller.signal
+            // Make a new request
+            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                .then(response => response.json())
+                .then(data => {
+                    recommendationsModal.value = []
+                    recommendationsSourceDataModal.value = data // Used to fit the map
+                    data.forEach( element => {
+                        let commaIndex = element.display_name.indexOf(',')
+                        let info = element.display_name.substring(commaIndex + 1).trim()
+                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                        recommendationsModal.value.push({
                             display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
                         })
                     })
@@ -150,6 +185,12 @@ createApp({
             new bootstrap.Offcanvas('#LocationInfo').show()
         }
 
+        function selectSearchBarItemModal(index) {
+            barFocusModal.value = false
+            currentLocationModal.value = recommendationsSourceDataModal.value[index]
+            queryModal.value = currentLocationModal.value.name
+        }
+
         function drawCurrentLocationGeometry() {
             if (Object.keys(currentLocationGeometry.value).length !== 0) {
                 map.value.removeLayer(currentLocationGeometry.value)
@@ -181,6 +222,12 @@ createApp({
             barFocus,
             currentLocation,
             selectSearchBarItem,
+
+            queryModal,
+            recommendationsModal,
+            barFocusModal,
+            currentLocationModal,
+            selectSearchBarItemModal,
 
 
             maceioCrimesData,

@@ -1,49 +1,75 @@
-const debug = false;
-const report_form = document.getElementById('report_form');
+// import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
+import { createApp, ref, watch, onMounted, toRaw } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+import { setMockeMarkers } from './Marker'
+createApp({
+    setup() {
+        /* Helpers */
+        const apiURL =  window.location.protocol + "//" + window.location.host + '/api/'
+        
+        /* Search */
+        const queryModal = ref('')
+        const barFocusModal = ref(false)
+        const recommendationsModal = ref([])
+        const recommendationsSourceData = ref([])
+        
+        /* App Data */
+        const currentLocation = ref({})
+        
+        /* Abort Controller */
+        let controller = new AbortController()
+        let signal = controller.signal
 
-const retrieveJsonMap = (mapkey) => {
-    return new Map(JSON.parse(localStorage.getItem(mapkey)));
-}
+        watch(queryModal, (newVal) => {
+            // Abort the previous request
+            controller.abort()
+            // Create a new AbortController
+            controller = new AbortController()
+            signal = controller.signal
+            // Make a new request
+            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                .then(response => response.json())
+                .then(data => {
+                    recommendationsModal.value = []
+                    recommendationsSourceData.value = data // Used to fit the map
+                    data.forEach( element => {
+                        let commaIndex = element.display_name.indexOf(',')
+                        let info = element.display_name.substring(commaIndex + 1).trim()
+                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                        recommendationsModal.value.push({
+                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+                        })
+                    })
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Another error: ', err)
+                    }
+                })
+        })  
 
-const psJsonMap = (mapList, key, typeForm, cepForm) => {
-    // Add new msg to the map
-    try {
-        mapList.get(typeForm).push(cepForm);
-        console.log("GET");
-    } catch {
-        mapList.set(typeForm, [cepForm]);
-        console.log("SET");
+        function selectSearchBarItemModal(index) {
+            barFocusModal.value = false
+            queryModal.value = ''
+            currentLocation.value = recommendationsSourceData.value[index]
+            fitCurrentLocationBounds()
+            new bootstrap.Offcanvas('#LocationInfo').show()
+        }
+
+        function fitCurrentLocationBounds() {
+            let boundingbox = currentLocation.value.boundingbox.map(Number)
+            boundingbox[2] -= 0.400 // margin-left
+            map.value.fitBounds([
+                [boundingbox[0], boundingbox[2]],
+                [boundingbox[1], boundingbox[3]]
+            ])
+        }
+
+        return { 
+            queryModal, 
+            recommendationsModal,
+            barFocusModal,
+            currentLocation,
+            selectSearchBarItemModal
+        }
     }
-
-    // Saves map with JSON format in LocalStorage
-    localStorage.setItem(key, JSON.stringify(Array.from(mapList.entries())));
-}
-
-report_form.addEventListener("submit", (e) => {
-    //Não permite o comportamento padrão do evendo submit
-    e.preventDefault();
-    let typeForm = document.getElementById("reportType").value;
-    let cepForm = document.getElementById('cepForm').value;
-    let key = "reportForm"
-
-    //Retrieves List of localStorage with id
-    //let msgList = retrieveJsonList(key);
-    //Add new email to the list
-    //msgList.push(kvInput);
-    //Saves List with JSON format in LocalStorage
-    //saveJsonList(key, msgList);
-    
-    // Retrieves the map
-    let mapList = retrieveJsonMap(key);
-    // Push new msg and save the map as JSON in LocalStorage
-    psJsonMap(mapList, key, typeForm, cepForm);
-    
-    //Debug Print mapList
-    if (debug) {
-        console.log(mapList);
-    }
-    
-    alert("Denuncia enviada!\n");
-    //reset forms
-    report_form.reset();
-});
+}).mount('#app')
