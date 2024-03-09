@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Report\StoreReportRequest;
 use App\Models\Crime;
 use App\Models\Report;
 use Illuminate\Http\Request;
@@ -28,9 +29,11 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReportRequest $request)
     {
-        //
+        Report::create($request->all());
+
+        return response()->json([],201);
     }
 
     /**
