@@ -23,9 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('reports')->group(function () {
     Route::controller(ReportController::class)->group(function (){
         Route::get('/crimes', 'index_by_crimes');
-        // Route::post('/store', 'store');
+        Route::post('/store', 'store');
+        Route::get('/', 'index');
     });
 });
+
 
 // Route::prefix('crimes')->group(function () {
 //     Route::controller(CrimeController::class)->group(function (){
