@@ -24,12 +24,8 @@
             <form id="report_form" class="modal-body">
                 <div class="mb-3 d-flex flex-row align-items-center">
                     <label class="form-label fs-5 me-2">Tipo da ocorrência:</label>
-                    <select class="form-control w-auto" name="Tipo_ocorrencia" id="reportType" required>
+                    <select class="form-control w-auto" name="Tipo_ocorrencia" id="crimeType" required>
                         <option value="" selected disabled>Selecione a ocorrência</option>
-                        <option value="at">Assalto</option>
-                        <option value="as">Assassinato</option>
-                        <option value="br">Brigas</option>
-                        <option value="vd">Venda de Drogas</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -43,12 +39,9 @@
                     <label class="form-label fs-5 m-2">Hora:</label>
                     <input class="form-control w-auto" type="time" name="time_ocorrencia" id="" required>
                 </div>
-                <!-- Colocar Duas colunas para dividir, no lugar de linhas, e depois mais duas colunas de cada lado para alinhar os campos.
-                        Na versão mobile, tudo é linha -->
                 <div class="mb-3">
                     <label class="form-label fs-5 fw-normal">Local do crime:</label>
                     <div>
-                        <!-- Implementação do novo sistema de busca de localização com base no de busca já realizado no mapa -->
                          @include('_search-barModal')
                     </div>
                 </div>   
@@ -61,6 +54,9 @@
     </div>
 </div>
 
+@push('scripts')
+        <script src="{{ Vite::asset('resources/js/components/ReportModal.js') }}" type="module"></script>
+    @endpush
 @push('styles')
     <link rel="stylesheet" href="{{ Vite::asset('resources/css/reportModal.css') }}">
 @endpush

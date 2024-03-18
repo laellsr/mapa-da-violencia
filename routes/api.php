@@ -29,8 +29,8 @@ Route::prefix('reports')->group(function () {
 });
 
 
-// Route::prefix('crimes')->group(function () {
-//     Route::controller(CrimeController::class)->group(function (){
-//         Route::get('/', 'index');
-//     });
-// });
+Route::prefix('crimes')->group(function () {
+    Route::controller(CrimeController::class)->group(function (){
+        Route::get('/', 'index');
+    });
+});
