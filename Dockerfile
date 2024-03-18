@@ -15,9 +15,6 @@ COPY . /var/www/html/
 COPY --from=build /usr/bin/composer /usr/bin/composer
 RUN composer install --prefer-dist --no-interaction
 
-# ENTRYPOINT ["sh", "./docker/prod.sh"]
-
-# CMD ["php","artisan","serve","--host=0.0.0.0"]
-
+ENTRYPOINT ["sh", "migrations.sh"]
 
 CMD ["php","artisan","serve", "--host=0.0.0.0"]
