@@ -23,3 +23,14 @@ fetchCrimes().then(data => {
     });
 }
 ).catch(err => {console.log(err);});
+
+
+
+try {
+    var currentLocationModal = JSON.parse(localStorage.getItem('currentLocationModal'));
+    console.log(currentLocationModal.name);
+} catch (error) {
+    var currentLocationModal = "";
+    console.log(error);
+}
+

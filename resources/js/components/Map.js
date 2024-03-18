@@ -189,6 +189,7 @@ createApp({
             barFocusModal.value = false
             currentLocationModal.value = recommendationsSourceDataModal.value[index]
             queryModal.value = currentLocationModal.value.name
+            localStorage.setItem('currentLocationModal', JSON.stringify(currentLocationModal.value))
         }
 
         function drawCurrentLocationGeometry() {

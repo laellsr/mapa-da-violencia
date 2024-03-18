@@ -50,7 +50,7 @@
       "assets/gun-e6pOFlTz.png",
       "assets/murder-tlFDIjrO.png"
     ],
-    "file": "assets/Map-eCBxKm2R.js",
+    "file": "assets/Map-1ZUbimVd.js",
     "isEntry": true,
     "src": "resources/js/components/Map.js"
   },
@@ -65,7 +65,7 @@
     "src": "resources/js/components/Register.js"
   },
   "resources/js/components/ReportModal.js": {
-    "file": "assets/ReportModal-Ib7j0Eow.js",
+    "file": "assets/ReportModal-sM0CiANd.js",
     "isEntry": true,
     "src": "resources/js/components/ReportModal.js"
   }
