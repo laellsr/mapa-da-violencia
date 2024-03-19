@@ -28,8 +28,8 @@ class StoreReportRequest extends FormRequest
             'osm_id' => 'required|integer', 
             'lat' => 'required|string', 
             'lon' => 'required|string', 
-            'date' => 'required|date', 
-            'time' => 'required|date_format:H:i:s', 
+            'date' => 'required|string', 
+            'time' => 'required|string', 
         ];
     }
     protected function failedValidation(Validator $validator)
