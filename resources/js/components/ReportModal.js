@@ -8,7 +8,7 @@ async function fetchCrimes() {
         const data = await response.json();
         return data;
     } catch (err) {
-        alert(err);
+        console.log(err);
     }
 }
 
@@ -24,13 +24,9 @@ fetchCrimes().then(data => {
 }
 ).catch(err => {console.log(err);});
 
-
-
 try {
     var currentLocationModal = JSON.parse(localStorage.getItem('currentLocationModal'));
     console.log(currentLocationModal.name);
 } catch (error) {
     var currentLocationModal = "";
-    console.log(error);
 }
-
