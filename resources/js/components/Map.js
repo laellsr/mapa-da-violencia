@@ -154,7 +154,6 @@ createApp({
                 })
         })
 
-        
 
         function setExternalSearch(url, signal) {
             var placeTitle
@@ -199,6 +198,35 @@ createApp({
             fitCurrentLocationBounds()
             OffCanvasModal.value.show()
         }
+
+                //Watch para a BUSCA do MODAL de DENUNCIAS
+        watch(queryModal, (newVal) => {
+            // Abort the previous request
+            controller.abort()
+            // Create a new AbortController
+            controller = new AbortController()
+            signal = controller.signal
+            // Make a new request
+            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                .then(response => response.json())
+                .then(data => {
+                    recommendationsModal.value = []
+                    recommendationsSourceDataModal.value = data // Used to fit the map
+                    data.forEach( element => {
+                        let commaIndex = element.display_name.indexOf(',')
+                        let info = element.display_name.substring(commaIndex + 1).trim()
+                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                        recommendationsModal.value.push({
+                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+                        })
+                    })
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Another error: ', err)
+                    }
+                })
+        })
 
         function selectSearchBarItemModal(index) {
             barFocusModal.value = false

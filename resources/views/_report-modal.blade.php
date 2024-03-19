@@ -32,12 +32,15 @@
                     <label class="form-label fs-5">Descrição:</label>
                     <textarea required placeholder="O que aconteceu?" name="desc" id="desc" class="form-control" cols="80" rows="5"></textarea>
                 </div>
-                <div class="mb-3 d-flex flex-row align-items-center">
-                    <label class="form-label fs-5 m-2">Data:</label>
-                    <input class="form-control w-auto" type="date" name="dt_ocorrencia" id="" required>
-
-                    <label class="form-label fs-5 m-2">Hora:</label>
-                    <input class="form-control w-auto" type="time" name="time_ocorrencia" id="" required>
+                <div class="mb-3 d-flex flex-row align-items-center justify-content-evenly">
+                    <div class="d-flex flex-row">
+                        <label class="form-label fs-5 mt-2">Data:</label>
+                        <input class="form-control w-auto" type="date" name="dt_ocorrencia" id="" required>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <label class="form-label fs-5 mt-2">Hora:</label>
+                        <input class="form-control w-auto" type="time" name="time_ocorrencia" id="" required>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fs-5 fw-normal">Local do crime:</label>

@@ -21,7 +21,7 @@ Route::get('map', function () {
     return view('map');
 })->name('map');
 
-Route::get('reg', function () {
+Route::get('register', function () {
     return view('register');
 })->name('register');
 

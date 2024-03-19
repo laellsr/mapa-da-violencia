@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row position-relative">
-                            <a href="welcome" class="btn btn-secondary px-3 text-uppercase fw-bolder">Cancelar</a>
+                            <a href="/" class="btn btn-secondary px-3 text-uppercase fw-bolder">Cancelar</a>
                             <button type="submit" class="position-absolute btn btn-primary px-3 text-uppercase fw-bolder start-50 translate-middle-x">Cadastrar</button>
                         </div> 
                     </form>
@@ -45,7 +45,9 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ Vite::asset('resources/js/components/Register.js') }}" type="module"></script>
-    @endpush
+<!-- @push('scripts')
+    <script src="{{ Vite::asset('resources/js/components/Register.js') }}" 
+    type="module"></script>
+@endpush
+-->
 @endsection
