@@ -50,7 +50,7 @@
       "assets/gun-e6pOFlTz.png",
       "assets/murder-tlFDIjrO.png"
     ],
-    "file": "assets/Map-1ZUbimVd.js",
+    "file": "assets/Map-pFv1s6TU.js",
     "isEntry": true,
     "src": "resources/js/components/Map.js"
   },
@@ -59,14 +59,14 @@
     "isEntry": true,
     "src": "resources/js/components/Marker.js"
   },
-  "resources/js/components/Register.js": {
-    "file": "assets/Register-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/js/components/Register.js"
-  },
   "resources/js/components/ReportModal.js": {
     "file": "assets/ReportModal-Y08Mq_Di.js",
     "isEntry": true,
     "src": "resources/js/components/ReportModal.js"
+  },
+  "resources/js/components/register.js": {
+    "file": "assets/register-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/js/components/register.js"
   }
 }

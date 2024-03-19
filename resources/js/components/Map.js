@@ -20,6 +20,7 @@ createApp({
         const currentLocationModal = ref({})
        
         /* OffCanvas */
+        const OffCanvasModal = ref({})
         
         /* Map */
         const map = ref([])
@@ -40,63 +41,9 @@ createApp({
         const maceioCrimesTotalData = ref(0)
         const maceioCrimesLabelData = ref([])
 
-        watch(query, (newVal) => {
-            // Abort the previous request
-            controller.abort()
-            // Create a new AbortController
-            controller = new AbortController()
-            signal = controller.signal
-            // Make a new request
-            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
-                .then(response => response.json())
-                .then(data => {
-                    recommendations.value = []
-                    recommendationsSourceData.value = data // Used to fit the map
-                    data.forEach( element => {
-                        let commaIndex = element.display_name.indexOf(',')
-                        let info = element.display_name.substring(commaIndex + 1).trim()
-                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
-                        recommendations.value.push({
-                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
-                        })
-                    })
-                })
-                .catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Another error: ', err)
-                    }
-                })
-        })
-
-        watch(queryModal, (newVal) => {
-            // Abort the previous request
-            controller.abort()
-            // Create a new AbortController
-            controller = new AbortController()
-            signal = controller.signal
-            // Make a new request
-            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
-                .then(response => response.json())
-                .then(data => {
-                    recommendationsModal.value = []
-                    recommendationsSourceDataModal.value = data // Used to fit the map
-                    data.forEach( element => {
-                        let commaIndex = element.display_name.indexOf(',')
-                        let info = element.display_name.substring(commaIndex + 1).trim()
-                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
-                        recommendationsModal.value.push({
-                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
-                        })
-                    })
-                })
-                .catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Another error: ', err)
-                    }
-                })
-        })
-
         onMounted(async () => {
+            // offcanvas
+            OffCanvasModal.value = new bootstrap.Offcanvas('#LocationInfo')
             // Create the base layers
             var layerGroupThreeMonths = L.layerGroup()
             var layerCustomDate = L.layerGroup()
@@ -133,7 +80,7 @@ createApp({
                 attributionControl: false,
                 layers: layersData,
                 minZoom: 3,
-                maxZoom: 19,
+                maxZoom: 18,
                 maxBounds: L.latLngBounds([-90, -180], [90, 180]),
                 wraparound: true
                 // Do not show other worlds when dragging
@@ -172,17 +119,85 @@ createApp({
                 sortLayers: true
             }).addTo(map.value)
 
+        })
 
-        })    
+        watch(query, (newVal) => {
+            // Abort the previous request
+            controller.abort()
+            // Create a new AbortController
+            controller = new AbortController()
+            signal = controller.signal
+            // Check if is a booking.com url
+            if (newVal.includes('booking.com')) {
+                setExternalSearch(newVal, signal)
+                return
+            }
+            // Make a new request
+            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                .then(response => response.json())
+                .then(data => {
+                    recommendations.value = []
+                    recommendationsSourceData.value = data // Used to fit the map
+                    data.forEach( element => {
+                        let commaIndex = element.display_name.indexOf(',')
+                        let info = element.display_name.substring(commaIndex + 1).trim()
+                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                        recommendations.value.push({
+                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+                        })
+                    })
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Another error: ', err)
+                    }
+                })
+        })
 
-        function selectSearchBarItem(index) {
+        
+
+        function setExternalSearch(url, signal) {
+            var placeTitle
+            fetch(apiURL + 'external', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+                .then(response => response.text())
+                .then(html => {
+                    let parser = new DOMParser();
+                    let doc = parser.parseFromString(html, 'text/html');
+                    placeTitle = doc.querySelector('#hp_hotel_name > div > h2').innerText;
+                    let placeLocal = doc.querySelector('#hotel_address').getAttribute('data-atlas-latlng').split(',')
+                    return fetch('https://nominatim.openstreetmap.org/reverse?lat=' + placeLocal[0] + '&lon=' + placeLocal[1] + '&format=jsonv2', { signal })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    cleanBar()
+                    data.name = placeTitle
+                    currentLocation.value = data
+                    drawCurrentLocationGeometry()
+                    drawCurrentLocationMarker()
+                    fitCurrentLocationBounds()
+                    OffCanvasModal.value.show()
+                })
+                .catch(err => console.error(err))
+        }
+
+        function cleanBar() {
             barFocus.value = false
             query.value = ''
+        }
+
+        function selectSearchBarItem(index) {
+            cleanBar()
             currentLocation.value = recommendationsSourceData.value[index]
             drawCurrentLocationGeometry()
             drawCurrentLocationMarker()
             fitCurrentLocationBounds()
-            new bootstrap.Offcanvas('#LocationInfo').show()
+            OffCanvasModal.value.show()
         }
 
         function selectSearchBarItemModal(index) {
@@ -210,7 +225,7 @@ createApp({
 
         function fitCurrentLocationBounds() {
             let boundingbox = currentLocation.value.boundingbox.map(Number)
-            boundingbox[2] -= 0.400 // margin-left
+            // boundingbox[2] -= 0.400 // margin-left
             map.value.fitBounds([
                 [boundingbox[0], boundingbox[2]],
                 [boundingbox[1], boundingbox[3]]
@@ -237,25 +252,3 @@ createApp({
         }
     }
 }).mount('#app')
-
-
-
-/* Essa parte do código é para pegar o nome da cidade, vila, estado, etc. */
-
-// let city = element.address.city ?? element.address.town ?? element.address.municipality
-// let village = element.address.village ?? element.address.hamlet ?? element.address.suburb ?? element.address.neighbourhood ?? element.address.city_district
-// let state = element.address.state ?? element.address.province ?? element.address.state_district ?? element.address.village
-// let display_name = ''
-// if (city !== undefined && city != element.name ) display_name += `${city}, `
-// if (village !== undefined && village != element.name ) display_name += `${village}, `
-// if (state !== undefined && state != element.name ) display_name += `${state}`
-// if (display_name !== '') display_name += ', '
-// let postcode = ''
-// if (element.address.postcode !== undefined) postcode = ` - ${element.address.postcode}`
-// let item = {
-//     display: `${element.name} - <span class="text-black-50 fst-italic">${display_name}${element.address.country}${postcode}</span>`,
-//     // coordinates: [element.lat, element.lon],
-//     boundingbox: element.boundingbox
-// }
-
-/* Fim - Comentei pq pode deixar mais lento */
