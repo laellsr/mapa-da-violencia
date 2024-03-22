@@ -1,6 +1,6 @@
 // import { createApp, ref, watch, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js'
 import { createApp, ref, watch, onMounted, toRaw } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-import { setMockeMarkers } from './Marker'
+import { createIcons} from './Marker'
 createApp({
     setup() {
         /* Helpers */
@@ -53,13 +53,16 @@ createApp({
             // Create the overlay layers and markers
             await fetch(apiURL + 'reports/crimes')
                 .then(response => response.json())
-                .then(data => {
+                .then(async data => {
+                    var colorsCrime=await createIcons(apiURL)
                     // Create the layers
                     data.forEach(crime => {
                         // Add the markers
                         let markers = []
                         crime.reports.forEach(report => {
-                            let marker = L.marker([Number(report.lat), Number(report.lon)])
+                            console.log(report)
+                            let marker = L.circleMarker([Number(report.lat), Number(report.lon)])
+                            marker.setStyle({fillColor: colorsCrime[report.crime_id],radius:10,stroke:false,fillOpacity:1});
                             // marker.bindPopup(report.description)
                             markers.push(marker)
                             // heatmap data
