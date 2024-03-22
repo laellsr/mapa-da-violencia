@@ -24,8 +24,9 @@ createApp({
         
         /* Map */
         const map = ref([])
-        const zoomLevel = ref(14)
+        const zoomLevel = ref(11)
         const overlayLayers = ref([])
+        const heatLayer = ref([])
         
         /* App Data */
         const currentLocation = ref({})
@@ -60,7 +61,9 @@ createApp({
                         crime.reports.forEach(report => {
                             let marker = L.marker([Number(report.lat), Number(report.lon)])
                             // marker.bindPopup(report.description)
-                            markers.push(marker)    
+                            markers.push(marker)
+                            // heatmap data
+                            heatLayer.value.push([Number(report.lat), Number(report.lon), crime.heatmap_intensity])
                         })
                         // Add the layer group to the overlay layers
                         let layerGroup = L.layerGroup(markers)
@@ -78,13 +81,13 @@ createApp({
             map.value = L.map('map', {
                 zoomControl: false, 
                 attributionControl: false,
-                layers: layersData,
+                // layers: layersData,
                 minZoom: 3,
                 maxZoom: 18,
                 maxBounds: L.latLngBounds([-90, -180], [90, 180]),
                 wraparound: true
                 // Do not show other worlds when dragging
-            }).setView([-9.663136558749533, -35.71422457695007], zoomLevel.value)
+            }).setView([-9.6, -35.71422457695007], zoomLevel.value)
             // Add the tile layer
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 noWrap: true,
@@ -107,7 +110,7 @@ createApp({
                   maxZoom: 16, 
                 },
             }).addTo(map.value)
-            setMockeMarkers(map,L)
+            // setMockeMarkers(map,L)
             // Add the layers control
             var baseMaps = {
                 '<input type="date">': layerCustomDate,
@@ -118,7 +121,35 @@ createApp({
                 collapsed: false,
                 sortLayers: true
             }).addTo(map.value)
-
+            // Add the heatmap
+            let heat = L.heatLayer(heatLayer.value, {
+                radius: 15,
+                blur: 15,
+                maxZoom: 12,
+                gradient: {0.4: 'blue', 0.6: 'cyan', 0.7: 'lime', 0.8: 'yellow', 1: 'red'}
+            })
+            heat.addTo(map.value)
+            // Add a zoomend event listener to the map
+            const markerDisplayZoomLevel = 13
+            var high = false;
+            map.value.on('zoomend', function() {
+                let currentZoomLevel = map.value.getZoom()
+                if (currentZoomLevel >= markerDisplayZoomLevel && !high) {
+                    // If the zoom level is high enough, add the markers
+                    for (let layerName in overlayLayers.value) {
+                        overlayLayers.value[layerName].addTo(map.value)
+                    }
+                    heat.setLatLngs([])
+                    high = true
+                } else if (currentZoomLevel < markerDisplayZoomLevel && high) {
+                    // If the zoom level is too low, remove the markers
+                    for (let layerName in overlayLayers.value) {
+                        overlayLayers.value[layerName].remove()
+                    }
+                    heat.setLatLngs(heatLayer.value)
+                    high = false
+                }
+            })
         })
 
         watch(query, (newVal) => {

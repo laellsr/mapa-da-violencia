@@ -10,7 +10,10 @@ class Crime extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'heatmap_intensity'
+    ];
 
     public function reports() : HasMany
     {

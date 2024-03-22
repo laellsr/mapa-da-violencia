@@ -44,13 +44,7 @@
     "src": "resources/js/app.js"
   },
   "resources/js/components/Map.js": {
-    "assets": [
-      "assets/medium_risk-eGVVO0mf.png",
-      "assets/high_danger-EreEzYfv.png",
-      "assets/gun-e6pOFlTz.png",
-      "assets/murder-tlFDIjrO.png"
-    ],
-    "file": "assets/Map-GIdNRgmR.js",
+    "file": "assets/Map-M7WO7_r8.js",
     "isEntry": true,
     "src": "resources/js/components/Map.js"
   },
@@ -59,14 +53,14 @@
     "isEntry": true,
     "src": "resources/js/components/Marker.js"
   },
-  "resources/js/components/Register.js": {
-    "file": "assets/Register-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/js/components/Register.js"
-  },
   "resources/js/components/ReportModal.js": {
     "file": "assets/ReportModal-CrUp-R5b.js",
     "isEntry": true,
     "src": "resources/js/components/ReportModal.js"
+  },
+  "resources/js/components/register.js": {
+    "file": "assets/register-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/js/components/register.js"
   }
 }
