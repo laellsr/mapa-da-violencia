@@ -10,7 +10,7 @@ export default defineConfig({
                 'resources/css/reportModal.css',
                 'resources/js/app.js',
                 'resources/js/components/Map.js',
-                'resources/js/components/Register.js',
+                'resources/js/components/register.js',
                 'resources/js/components/ReportModal.js',
                 'resources/js/components/Marker.js',
             ],
