@@ -3,8 +3,7 @@
 @push('styles')
     <style>
         body {
-            background:  linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%); 
-            height: 94vh;
+            background:  var(--bg-main-color);
         }
     </style>
 @endpush

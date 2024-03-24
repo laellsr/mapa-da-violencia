@@ -7,13 +7,13 @@
         </div>
         <div v-if="currentLocation.name" class="offcanvas-body">
             <p class="mb-3" v-html="currentLocation.display_name"></p>
-            <div v-if="Object.keys(maceioCrimesLabelData).length !== 0">
+            {{-- <div v-if="Object.keys(maceioCrimesLabelData).length !== 0">
                 <h6>Relatados nos últimos 3 meses</h6>
                 <ul>
                     <p v-html="'Total de crimes: ' + maceioCrimesTotalData"></p>
                     <li v-for="(label, index) in maceioCrimesLabelData" v-html="'<b>'+((maceioCrimesData[index]*100)/maceioCrimesTotalData).toFixed(2) + '%</b> - ' + label"></li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

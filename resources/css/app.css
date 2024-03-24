@@ -1,3 +1,7 @@
+:root {
+    --bg-main-color: linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%);
+}
+
 #map { 
     height: 100%;
     width: 100%; 
@@ -56,4 +60,8 @@ input:focus {
     bottom: 0;
     width: 200px;
     pointer-events: none;
+}
+
+.modal-content {
+    background: var(--bg-main-color);
 }

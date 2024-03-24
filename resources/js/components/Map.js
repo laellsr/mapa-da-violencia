@@ -11,13 +11,6 @@ createApp({
         const barFocus = ref(false)
         const recommendations = ref([])
         const recommendationsSourceData = ref([])
-
-        /* Search Modal */
-        const queryModal = ref('')
-        const barFocusModal = ref(false)
-        const recommendationsModal = ref([])
-        const recommendationsSourceDataModal = ref([])
-        const currentLocationModal = ref({})
        
         /* OffCanvas */
         const OffCanvasModal = ref({})
@@ -36,11 +29,6 @@ createApp({
         /* Abort Controller */
         let controller = new AbortController()
         let signal = controller.signal
-
-        // escluir depois
-        const maceioCrimesData = ref([])
-        const maceioCrimesTotalData = ref(0)
-        const maceioCrimesLabelData = ref([])
 
         onMounted(async () => {
             // offcanvas
@@ -69,11 +57,6 @@ createApp({
                         let layerGroup = L.layerGroup(markers)
                         overlayLayers.value[crime.name] = layerGroup
                         layersData.push(layerGroup)
-
-                        //excluir depois
-                        maceioCrimesData.value.push(markers.length)
-                        maceioCrimesLabelData.value.push(crime.name)
-                        maceioCrimesTotalData.value += markers.length
                     })
                 })
                 .catch(err => console.error(err))
@@ -206,12 +189,11 @@ createApp({
                 .then(response => response.json())
                 .then(data => {
                     cleanBar()
+                    recommendations.value = []
+                    recommendationsSourceData.value = []
                     data.name = placeTitle
                     currentLocation.value = data
-                    drawCurrentLocationGeometry()
-                    drawCurrentLocationMarker()
-                    fitCurrentLocationBounds()
-                    OffCanvasModal.value.show()
+                    updateMap()
                 })
                 .catch(err => console.error(err))
         }
@@ -224,46 +206,14 @@ createApp({
         function selectSearchBarItem(index) {
             cleanBar()
             currentLocation.value = recommendationsSourceData.value[index]
+            updateMap()
+        }
+
+        function updateMap() {
             drawCurrentLocationGeometry()
             drawCurrentLocationMarker()
             fitCurrentLocationBounds()
-            OffCanvasModal.value.show()
-        }
-
-                //Watch para a BUSCA do MODAL de DENUNCIAS
-        watch(queryModal, (newVal) => {
-            // Abort the previous request
-            controller.abort()
-            // Create a new AbortController
-            controller = new AbortController()
-            signal = controller.signal
-            // Make a new request
-            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
-                .then(response => response.json())
-                .then(data => {
-                    recommendationsModal.value = []
-                    recommendationsSourceDataModal.value = data // Used to fit the map
-                    data.forEach( element => {
-                        let commaIndex = element.display_name.indexOf(',')
-                        let info = element.display_name.substring(commaIndex + 1).trim()
-                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
-                        recommendationsModal.value.push({
-                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
-                        })
-                    })
-                })
-                .catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Another error: ', err)
-                    }
-                })
-        })
-
-        function selectSearchBarItemModal(index) {
-            barFocusModal.value = false
-            currentLocationModal.value = recommendationsSourceDataModal.value[index]
-            queryModal.value = currentLocationModal.value.name
-            localStorage.setItem('currentLocationModal', JSON.stringify(currentLocationModal.value))
+            updateOffCanvasStatistics()
         }
 
         function drawCurrentLocationGeometry() {
@@ -291,23 +241,26 @@ createApp({
             ])
         }
 
+        function updateOffCanvasStatistics() {
+            fetch(apiURL + 'reports/statistics', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(currentLocation.value.address)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => console.error(err))   
+            OffCanvasModal.value.show()
+        }
+
         return { 
             query, 
             recommendations,
             barFocus,
             currentLocation,
             selectSearchBarItem,
-
-            queryModal,
-            recommendationsModal,
-            barFocusModal,
-            currentLocationModal,
-            selectSearchBarItemModal,
-
-
-            maceioCrimesData,
-            maceioCrimesTotalData,
-            maceioCrimesLabelData
         }
     }
 }).mount('#app')
