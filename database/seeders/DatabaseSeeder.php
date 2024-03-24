@@ -43,215 +43,292 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Tráfico de pessoas', 'heatmap_intensity' => 1],
         ]);
 
+        $ext = [
+            "city" => "Maceió",
+            "city_osm_type" => "R",
+            "city_osm_id" => 303815,
+            "state" => "Alagoas",
+            "state_osm_type" => "R",
+            "state_osm_id" => 303781,
+            "region" => "Região Nordeste",
+            "region_osm_type" => "R",
+            "region_osm_id" => 3360429,
+            "country" => "Brasil"
+        ];
         //IPIOCA
-        Report::create([
+        $ipioca = [
+            "suburb" => "Ipioca",
+            "suburb_osm_id" => 5543428,
+            "suburb_osm_type" => "R"
+        ];
+
+        Report::create(array_merge([
             'crime_id' => '5',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543428',
             'lat' => '-9.524677', 
             'lon' => '-35.606986',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $ipioca, $ext));
+        Report::create(array_merge([
             'crime_id' => '7',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543428',
             'lat' => '-9.526024', 
             'lon' => '-35.609512',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $ipioca, $ext));
+        Report::create(array_merge([
+            'crime_id' => '5',
+            'osm_type' => 'N',
+            'osm_id' => '5543428',
+            'lat' => '-9.524677', 
+            'lon' => '-35.606986',
+            'date' => '2024-02-27',
+            'time' => '23:45:01'
+        ], $ipioca, $ext));
         //PESCARIA
-        Report::create([
+        $pescaria = [
+            "suburb" => "Pescaria",
+            "suburb_osm_id" => 5543420,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '8',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543420',
             'lat' => '-9.538612', 
             'lon' => '-35.621694',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $pescaria, $ext));
+        Report::create(array_merge([
             'crime_id' => '13',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543420',
             'lat' => '-9.537610', 
             'lon' => '-35.619965',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $pescaria, $ext));
         //RIACHO DOCE
-        Report::create([
+        $riachodoce = [
+            "suburb" => "Riacho Doce",
+            "suburb_osm_id" => 5543411,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '2',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543411',
             'lat' => '-9.576342', 
             'lon' => '-35.660680',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $riachodoce, $ext));
+        Report::create(array_merge([
             'crime_id' => '9',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '5543411',
             'lat' => '-9.574091', 
             'lon' => '-35.658172',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $riachodoce, $ext));
         //GARÇA TORTA
-        Report::create([
+        $garcatorta = [
+            "suburb" => "Garca Torta",
+            "suburb_osm_id" => 402875,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '17',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402875',
             'lat' => '-9.582046', 
             'lon' => '-35.666848',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $garcatorta, $ext));
+        Report::create(array_merge([
             'crime_id' => '4',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402875',
             'lat' => '-9.579379', 
             'lon' => '-35.663215',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $garcatorta, $ext));
         //GUAXUMA
-        Report::create([
+        $guaxuma = [
+            "suburb" => "Guaxuma",
+            "suburb_osm_id" => 402314,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '6',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402314',
             'lat' => '-9.595075', 
             'lon' => '-35.678017',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $guaxuma, $ext));
+        Report::create(array_merge([
             'crime_id' => '11',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402314',
             'lat' => '-9.593832',  
             'lon' => '-35.681753',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $guaxuma, $ext));
         //JACARECICA
-        Report::create([
+        $jacarecica = [
+            "suburb" => "Jacarecica",
+            "suburb_osm_id" => 402032,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '3',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402032',
             'lat' => '-9.582539', 
             'lon' => '-35.705192',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $jacarecica, $ext));
+        Report::create(array_merge([
             'crime_id' => '15',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402032',
             'lat' => '-9.580547',  
             'lon' => '-35.701259',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $jacarecica, $ext));
         //CRUZ DAS ALMAS
-        Report::create([
+        $cruzdasalmas = [
+            "suburb" => "Cruz das Almas",
+            "suburb_osm_id" => 401801,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '10',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '401801',
             'lat' => '-9.627310',
             'lon' => '-35.707687',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $cruzdasalmas, $ext));
+        Report::create(array_merge([
             'crime_id' => '17',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '401801',
             'lat' => '-9.625374', 
             'lon' => '-35.707848',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $cruzdasalmas, $ext));
         //BENEDITO BENTES
-        Report::create([
+        $beneditobentes = [
+            "suburb" => "Benedito Bentes",
+            "suburb_osm_id" => 402896,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '17',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402896',
             'lat' => '-9.539858',
             'lon' => '-35.721529',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $beneditobentes, $ext));
+        Report::create(array_merge([
             'crime_id' => '1',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402896',
             'lat' => '-9.567206', 
             'lon' => '-35.718163',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $beneditobentes, $ext));
         //ANTARES
-        Report::create([
+        $antares = [
+            "suburb" => "Antares",
+            "suburb_osm_id" => 402205,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '5',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402205',
             'lat' => '-9.583499', 
             'lon' => '-35.731653',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $antares, $ext));
+        Report::create(array_merge([
             'crime_id' => '10',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402205',
             'lat' => '-9.567230', 
             'lon' => '-35.746485',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $antares, $ext));
         //CIDADE UNIVERSITARIA
-        Report::create([
+        $cidadeuniversitaria = [
+            "suburb" => "Cidade Universitaria",
+            "suburb_osm_id" => 402830,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '1',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402830',
             'lat' => '-9.553442', 
             'lon' => '-35.776745',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $cidadeuniversitaria, $ext));
+        Report::create(array_merge([
             'crime_id' => '8',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '402830',
             'lat' => '-9.531442', 
             'lon' => '-35.774363',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $cidadeuniversitaria, $ext));
         //POÇO
-        Report::create([
+        $poco = [
+            "suburb" => "Poco",
+            "suburb_osm_id" => 400191,
+            "suburb_osm_type" => "R"
+        ];
+        Report::create(array_merge([
             'crime_id' => '3',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '400191',
             'lat' => '-9.662112', 
             'lon' => '-35.723071',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
-        Report::create([
+        ], $poco, $ext));
+        Report::create(array_merge([
             'crime_id' => '5',
             'osm_type' => 'N',
-            'osm_id' => '1234567890',
+            'osm_id' => '400191',
             'lat' => '-9.656882', 
             'lon' => '-35.715096',
             'date' => '2024-02-27',
             'time' => '23:45:01'
-        ]);
+        ], $poco, $ext));
 
     }
 }
