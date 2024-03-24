@@ -80,15 +80,6 @@ class DatabaseSeeder extends Seeder
             'date' => '2024-02-27',
             'time' => '23:45:01'
         ], $ipioca, $ext));
-        Report::create(array_merge([
-            'crime_id' => '5',
-            'osm_type' => 'N',
-            'osm_id' => '5543428',
-            'lat' => '-9.524677', 
-            'lon' => '-35.606986',
-            'date' => '2024-02-27',
-            'time' => '23:45:01'
-        ], $ipioca, $ext));
         //PESCARIA
         $pescaria = [
             "suburb" => "Pescaria",
