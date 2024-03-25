@@ -13,7 +13,8 @@ createApp({
         const recommendationsSourceData = ref([])
        
         /* OffCanvas */
-        const OffCanvasModal = ref({})
+        const offCanvasModal = ref({})
+        const statistics = ref({})
         
         /* Map */
         const map = ref([])
@@ -32,7 +33,7 @@ createApp({
 
         onMounted(async () => {
             // offcanvas
-            OffCanvasModal.value = new bootstrap.Offcanvas('#LocationInfo')
+            offCanvasModal.value = new bootstrap.Offcanvas('#LocationInfo')
             // Create the base layers
             var layerGroupThreeMonths = L.layerGroup()
             var layerCustomDate = L.layerGroup()
@@ -210,6 +211,7 @@ createApp({
         }
 
         function updateMap() {
+            statistics.value = {}
             drawCurrentLocationGeometry()
             drawCurrentLocationMarker()
             fitCurrentLocationBounds()
@@ -242,17 +244,17 @@ createApp({
         }
 
         function updateOffCanvasStatistics() {
-            fetch(apiURL + 'reports/statistics', {
+            fetch(apiURL + 'crimes/statistics', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(currentLocation.value.address)
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    statistics.value = data;
                 })
                 .catch(err => console.error(err))   
-            OffCanvasModal.value.show()
+            offCanvasModal.value.show()
         }
 
         return { 
@@ -260,6 +262,7 @@ createApp({
             recommendations,
             barFocus,
             currentLocation,
+            statistics,
             selectSearchBarItem,
         }
     }

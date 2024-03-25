@@ -24,6 +24,10 @@ class StatisticsCrimeRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'suburb' => 'string',
+            'city' => 'string',
+            'state' => 'string',
+            'region' => 'string',
             'country' => 'required|string'
         ];
     }
