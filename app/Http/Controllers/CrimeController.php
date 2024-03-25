@@ -20,7 +20,7 @@ class CrimeController extends Controller
     public function statistics(StatisticsCrimeRequest $request) {
         $data = [
             'suburb' => $request->suburb ?? '',
-            'city' => $request->city ?? '',
+            'city' => $request->city ?? $request->municipality ?? '',
             'state' => $request->state ?? '',
             'region' => $request->region ?? '',
             'country' => $request->country
@@ -48,15 +48,18 @@ class CrimeController extends Controller
         ->withCount(['reports as dawn_reports_count' => function($query) use ($where) {
             $query->where($where)->whereRaw('TIME(time) BETWEEN ? AND ?', ['00:00:00', '05:59:59']);
         }])
+        ->orderBy('name')
         ->get();
 
         $dict = [
             'suburb' => 'Bairro',
             'city' => 'Cidade',
             'state' => 'Estado',
-            'region' => 'Região',
-            'country' => 'País'
+            'region' => '',
+            'country' => ''
         ];
+
+        $data = $where;
 
         $data_first_key = array_key_first($data);
 
@@ -76,7 +79,7 @@ class CrimeController extends Controller
             array_shift($data);
             $data_first_key = array_key_first($data);
             $data_comparison = Report::where($data)->count();
-            $percent = ($response['totalReports'] * 100) / $data_comparison;
+            $percent = ($data_comparison > 0) ? ($response['totalReports'] * 100) / $data_comparison : 0;
             $comparison = $placeReport . ' registrou ' . $response['totalReports'] . ' ocorrências, isso equivale a ' . number_format($percent, 0) . '% de todos os ' . $data_comparison . ' crimes registrados no(a) ' . strtolower($dict[$data_first_key]) . ' ' . $data[$data_first_key] . '.';
             $response['comparison'] = $comparison;
         }

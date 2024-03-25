@@ -127,6 +127,9 @@ createApp({
                         text: "Sua denúncia foi registrada e a aplicação será recarregada em instantes.",
                         showConfirmButton: false
                     })
+                    setTimeout(function() {
+                        location.reload();
+                    }, 5000);
                 })
                 .catch((error) => {
                     Swal.fire({

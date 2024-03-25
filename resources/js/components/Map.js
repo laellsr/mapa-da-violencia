@@ -106,7 +106,7 @@ createApp({
             L.control.layers(baseMaps, toRaw(overlayLayers.value), {
                 position: 'topright',
                 collapsed: false,
-                sortLayers: true
+                sortLayers: false
             }).addTo(map.value)
             // Add the heatmap
             let heat = L.heatLayer(heatLayer.value, {
@@ -244,6 +244,7 @@ createApp({
                 [boundingbox[0], boundingbox[2]],
                 [boundingbox[1], boundingbox[3]]
             ])
+            map.value.panBy([-80, 0])
         }
 
         function updateOffCanvasStatistics() {

@@ -26,6 +26,7 @@ class StatisticsCrimeRequest extends FormRequest
         return [
             'suburb' => 'string',
             'city' => 'string',
+            'municipality' => 'string',
             'state' => 'string',
             'region' => 'string',
             'country' => 'required|string'
