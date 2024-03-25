@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Report\StoreReportRequest;
 use App\Models\Crime;
 use App\Models\Report;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -18,12 +19,30 @@ class ReportController extends Controller
         return response()->json(Report::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
+     /**
+     * Display a listing of the resource by crimes.
      */
-    public function create()
+    public function index_by_crimes()
     {
-        //
+        $crimes = Crime::has('reports')
+        ->with(['reports' => function($query) {
+            $query->select('crime_id', 'lat', 'lon');        
+        }])->get();
+
+        return response()->json($crimes, 200);
+    }
+
+    public function get_osm_type_enum($osm_type) {
+        switch ($osm_type) {
+            case 'node':
+                return 'N';
+            case 'way':
+                return 'W';
+            case 'relation':
+                return 'R';
+            default:
+                return null;
+        }
     }
 
     /**
@@ -31,9 +50,66 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        Report::create($request->all());
+        $osm_type = $this->get_osm_type_enum($request->osm_type);
 
-        return response()->json([],201);
+        $client = new Client();
+
+        $url = 'https://nominatim.openstreetmap.org/details.php?osmtype=' . $osm_type . '&osmid=' . $request->osm_id . '&addressdetails=1&format=json';
+
+        $response = $client->request('GET', $url);
+
+        $data = json_decode($response->getBody(), true);
+
+        $reportPlaceData = [
+            $request->suburb => [
+                'osm_type' => '',
+                'osm_id' => '',
+            ],
+            $request->city => [
+                'osm_type' => '',
+                'osm_id' => '',
+            ],
+            $request->state => [
+                'osm_type' => '',
+                'osm_id' => '',
+            ],
+            $request->region => [
+                'osm_type' => '',
+                'osm_id' => '',
+            ]
+        ];
+    
+        foreach ($data['address'] as $address) {
+            if($address['class'] == 'boundary' && array_key_exists($address['localname'], $reportPlaceData)) {
+                $reportPlaceData[$address['localname']]['osm_type'] = $address['osm_type'];
+                $reportPlaceData[$address['localname']]['osm_id'] = $address['osm_id'];
+            }
+        }
+
+        $report = Report::create([
+            'crime_id' => $request->crime_id,
+            'osm_type' => $osm_type,
+            'osm_id' => $request->osm_id,
+            'lat' => $request->lat,
+            'lon' => $request->lon,
+            'date' => $request->date,
+            'time' => $request->time,
+            'suburb' => $request->suburb,
+            'suburb_osm_type' => $reportPlaceData[$request->suburb]['osm_type'],
+            'suburb_osm_id' => $reportPlaceData[$request->suburb]['osm_id'],
+            'city' => $request->city,
+            'city_osm_type' => $reportPlaceData[$request->city]['osm_type'],
+            'city_osm_id' => $reportPlaceData[$request->city]['osm_id'],
+            'state' => $request->state,
+            'state_osm_type' => $reportPlaceData[$request->state]['osm_type'],
+            'state_osm_id' => $reportPlaceData[$request->state]['osm_id'],
+            'region' => $request->region,
+            'region_osm_type' => $reportPlaceData[$request->region]['osm_type'],
+            'region_osm_id' => $reportPlaceData[$request->region]['osm_id'],
+            'country' => $request->country,
+        ]);
+        
+        return response()->json($report, 201);
     }
 
     /**
@@ -66,15 +142,5 @@ class ReportController extends Controller
     public function destroy(Report $report)
     {
         //
-    }
-
-    /**
-     * Display a listing of the resource by crimes.
-     */
-    public function index_by_crimes()
-    {
-        $crimes = Crime::has('reports')->with('reports')->get();
-
-        return response()->json($crimes, 200);
     }
 }

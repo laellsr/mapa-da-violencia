@@ -2,11 +2,6 @@
     z-index: 19;
 }
 
-#denunciarModal .modal-content {
-    background-color: #74879E;
-    color: #FFFFFF;
-}
-
 .btn-mdenunciar {
     background: none;
     border: none;
