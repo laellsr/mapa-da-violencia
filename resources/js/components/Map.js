@@ -62,7 +62,7 @@ createApp({
                         crime.reports.forEach(report => {
                             console.log(report)
                             let marker = L.circleMarker([Number(report.lat), Number(report.lon)])
-                            marker.setStyle({fillColor: colorsCrime[report.crime_id],radius:10,stroke:false,fillOpacity:1});
+                            marker.setStyle({fillColor: colorsCrime[report.crime_id],radius:4,stroke:false,fillOpacity:1});
                             // marker.bindPopup(report.description)
                             markers.push(marker)
                             // heatmap data
@@ -70,7 +70,7 @@ createApp({
                         })
                         // Add the layer group to the overlay layers
                         let layerGroup = L.layerGroup(markers)
-                        overlayLayers.value[crime.name] = layerGroup
+                        overlayLayers.value['<span class="me-1 ms-1 border" style="border-radius: 5px; background-color:' + colorsCrime[crime.id]+'; width:10px; height:10px; display:inline-block"></span>'+crime.name] = layerGroup
                         layersData.push(layerGroup)
 
                         //excluir depois

@@ -1,6 +1,6 @@
 export async function createIcons(apiUrl){
     // var assetUrl=document.getElementById("assetUrl").value
-    var Colorlist=['red','green','blue','purple','black','pink','yellow','magenta','orange','yellow','cyan','navy','lightYellow','lemonChiffon','IndianRed','Crimson','FireBrick']
+    var Colorlist=['purple','black','blue','purple','darkred','darkgreen','pink','brown','orange','red','Crimson','navy','lightYellow','lemonChiffon','IndianRed','Crimson','FireBrick']
     var crimes= await fetch(apiUrl+'crimes').then(response=>response.json())
     var i=0
     var crimeColorsDict={};
