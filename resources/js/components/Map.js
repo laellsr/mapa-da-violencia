@@ -6,11 +6,20 @@ createApp({
         /* Helpers */
         const apiURL =  window.location.protocol + "//" + window.location.host + '/api/'
         
+        /* Loading */
+        const showLoading = ref(true)
+        const showSearchBarLoading = ref(false)
+
         /* Search */
         const query = ref('')
         const barFocus = ref(false)
         const recommendations = ref([])
         const recommendationsSourceData = ref([])
+
+        /* Date Filter */
+        let date = new Date()
+        date.setMonth(date.getMonth() - 3);
+        const dateFilter = ref(date.toISOString().split('T')[0])
        
         /* OffCanvas */
         const offCanvasModal = ref({})
@@ -20,7 +29,9 @@ createApp({
         const map = ref([])
         const zoomLevel = ref(11)
         const overlayLayers = ref([])
+        const controlLayers = ref({})
         const heatLayer = ref([])
+        const heatmap = ref({})
         
         /* App Data */
         const currentLocation = ref({})
@@ -40,30 +51,7 @@ createApp({
             var layersData = []
             layersData.push(layerGroupThreeMonths)
             // Create the overlay layers and markers
-            await fetch(apiURL + 'reports/crimes')
-                .then(response => response.json())
-                .then(async data => {
-                    var colorsCrime=await createIcons(apiURL)
-                    // Create the layers
-                    data.forEach(crime => {
-                        // Add the markers
-                        let markers = []
-                        crime.reports.forEach(report => {
-                            console.log(report)
-                            let marker = L.circleMarker([Number(report.lat), Number(report.lon)])
-                            marker.setStyle({fillColor: colorsCrime[report.crime_id],radius:4,stroke:false,fillOpacity:1});
-                            // marker.bindPopup(report.description)
-                            markers.push(marker)
-                            // heatmap data
-                            heatLayer.value.push([Number(report.lat), Number(report.lon), crime.heatmap_intensity])
-                        })
-                        // Add the layer group to the overlay layers
-                        let layerGroup = L.layerGroup(markers)
-                        overlayLayers.value['<span class="me-1 ms-1 border" style="border-radius: 5px; background-color:' + colorsCrime[crime.id]+'; width:10px; height:10px; display:inline-block"></span>'+crime.name] = layerGroup
-                        layersData.push(layerGroup)
-                    })
-                })
-                .catch(err => console.error(err))
+            await fetchCrimesAndUpdateLayers()
             // Create the map
             map.value = L.map('map', {
                 zoomControl: false, 
@@ -79,7 +67,7 @@ createApp({
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 noWrap: true,
                 worldCopyJump: true
-            }).addTo(map.value)         
+            }).addTo(map.value)
             // Zoom control interface
             L.control.zoom({position: 'bottomright'}).addTo(map.value)
             // Plugin to show user location
@@ -97,28 +85,56 @@ createApp({
                   maxZoom: 16, 
                 },
             }).addTo(map.value)
-            // setMockeMarkers(map,L)
+            // Add the custom date control
+            L.Control.DatePicker = L.Control.extend({
+                onAdd: function(map) {
+                    var container = L.DomUtil.create('div')
+                    container.id = "datePickerContainer"
+                    container.className = "bg-white rounded shadow-sm border border-dark p-2"
+                    L.DomEvent.disableClickPropagation(container)
+                    var label = L.DomUtil.create('label', '', container)
+                    label.innerHTML = 'Serão mostrados apenas as ocorrências até a data selecionada. Por padrão, são exibidos apenas os dados dos últimos 3 meses.'
+                    label.className = "form-label"
+                    var input = L.DomUtil.create('input', '', container)
+                    input.type = "date"
+                    input.className = "form-control form-control-sm"
+                    input.value = dateFilter.value
+                    input.onchange = function(e) {
+                        console.log("change");
+                        dateFilter.value = e.target.value
+                        updateLayersOnMap()
+                    }
+                    return container
+                },
+                onRemove: function(map) {
+                    // Nothing to do here
+                }
+            })
+            L.control.datepicker = function(opts) {
+                return new L.Control.DatePicker(opts)
+            }
+            L.control.datepicker({ position: 'topright' }).addTo(map.value)
             // Add the layers control
             var baseMaps = {
                 '<input type="date">': layerCustomDate,
                 "em até 3 meses": layerGroupThreeMonths
             }
-            L.control.layers(baseMaps, toRaw(overlayLayers.value), {
+            controlLayers.value = L.control.layers({}, toRaw(overlayLayers.value), {
                 position: 'topright',
                 collapsed: false,
                 sortLayers: false
             }).addTo(map.value)
             // Add the heatmap
-            let heat = L.heatLayer(heatLayer.value, {
+            heatmap.value = L.heatLayer(heatLayer.value, {
                 radius: 15,
                 blur: 15,
                 maxZoom: 12,
                 gradient: {0.4: 'blue', 0.6: 'cyan', 0.7: 'lime', 0.8: 'yellow', 1: 'red'}
             })
-            heat.addTo(map.value)
+            heatmap.value.addTo(map.value)
             // Add a zoomend event listener to the map
             const markerDisplayZoomLevel = 13
-            var high = false;
+            var high = false
             map.value.on('zoomend', function() {
                 let currentZoomLevel = map.value.getZoom()
                 if (currentZoomLevel >= markerDisplayZoomLevel && !high) {
@@ -126,20 +142,113 @@ createApp({
                     for (let layerName in overlayLayers.value) {
                         overlayLayers.value[layerName].addTo(map.value)
                     }
-                    heat.setLatLngs([])
+                    heatmap.value.setLatLngs([])
                     high = true
                 } else if (currentZoomLevel < markerDisplayZoomLevel && high) {
                     // If the zoom level is too low, remove the markers
                     for (let layerName in overlayLayers.value) {
                         overlayLayers.value[layerName].remove()
                     }
-                    heat.setLatLngs(heatLayer.value)
+                    heatmap.value.setLatLngs(heatLayer.value)
                     high = false
                 }
             })
+            hideLoadingContainer()
         })
 
+        function showLoadingContainer() {
+            showLoading.value = true
+        }
+
+        function hideLoadingContainer() {
+            showLoading.value = false
+        }
+
+        async function updateLayersOnMap() {
+            // Show the loading container
+            showLoadingContainer()
+            // Disable zoom
+            lockZoom()
+            // Remove the current layers
+            for (let layerName in overlayLayers.value) {
+                overlayLayers.value[layerName].remove()
+            }
+            // Clear heatmap
+            heatmap.value.setLatLngs([])
+            // Clear the heat layer
+            heatLayer.value = []
+            // Add the new layers
+            await fetchCrimesAndUpdateLayers()
+            // Update the heatmap
+            heatmap.value.setLatLngs(heatLayer.value)
+            // Update the map
+            for (let layerName in overlayLayers.value) {
+                overlayLayers.value[layerName].addTo(map.value)
+            }
+            // Update the control layers
+            map.value.removeControl(controlLayers.value)
+            // Add the layers control
+            controlLayers.value = L.control.layers({}, toRaw(overlayLayers.value), {
+                position: 'topright',
+                collapsed: false,
+                sortLayers: false
+            }).addTo(map.value)
+            // Enable zoom
+            unlockZoom()
+            // Hide the loading container
+            hideLoadingContainer()
+        }
+
+        function lockZoom() {
+            map.value.touchZoom.disable()
+            map.value.doubleClickZoom.disable()
+            map.value.scrollWheelZoom.disable()
+            map.value.boxZoom.disable()
+        }
+
+        function unlockZoom() {
+            map.value.touchZoom.enable()
+            map.value.doubleClickZoom.enable()
+            map.value.scrollWheelZoom.enable()
+            map.value.boxZoom.enable()
+        }
+
+        async function fetchCrimesAndUpdateLayers() {
+            try {
+                const response = await fetch(apiURL + 'reports/crimes', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ date: dateFilter.value })
+                })
+                const data = await response.json()
+                const colorsCrime = await createIcons(apiURL)
+                overlayLayers.value = []
+                // Create the layers
+                data.forEach(crime => {
+                    // Add the markers
+                    let markers = []
+                    crime.reports.forEach(report => {
+                        let marker = L.circleMarker([Number(report.lat), Number(report.lon)])
+                        marker.setStyle({fillColor: colorsCrime[report.crime_id],radius:6,stroke:false,fillOpacity:1})
+                        marker.bindTooltip(crime.name)
+                        markers.push(marker)
+                        // heatmap data
+                        heatLayer.value.push([Number(report.lat), Number(report.lon), crime.heatmap_intensity])
+                    })
+                    // Add the layer group to the overlay layers
+                    let layerGroup = L.layerGroup(markers)
+                    overlayLayers.value['<span class="me-1 ms-1 border" style="border-radius: 5px; background-color:' + colorsCrime[crime.id]+'; width:10px; height:10px; display:inline-block"></span>'+crime.name] = layerGroup
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        let timeoutId = null;
+
         watch(query, (newVal) => {
+            // Show the search bar loading
+            showSearchBarLoading.value = true
             // Abort the previous request
             controller.abort()
             // Create a new AbortController
@@ -150,26 +259,35 @@ createApp({
                 setExternalSearch(newVal, signal)
                 return
             }
-            // Make a new request
-            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
-                .then(response => response.json())
-                .then(data => {
-                    recommendations.value = []
-                    recommendationsSourceData.value = data // Used to fit the map
-                    data.forEach( element => {
-                        let commaIndex = element.display_name.indexOf(',')
-                        let info = element.display_name.substring(commaIndex + 1).trim()
-                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
-                        recommendations.value.push({
-                            display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+            // Clear the previous timeout if there is one
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            // Set a new timeout
+            timeoutId = setTimeout(() => {
+                // Make a new request
+                fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                    .then(response => response.json())
+                    .then(data => {
+                        recommendations.value = []
+                        recommendationsSourceData.value = data // Used to fit the map
+                        data.forEach( element => {
+                            let commaIndex = element.display_name.indexOf(',')
+                            let info = element.display_name.substring(commaIndex + 1).trim()
+                            let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                            recommendations.value.push({
+                                display: `${element.name} <span class="text-black-50 fst-italic">- ${info}${postcode}</span>`,
+                            })
                         })
                     })
-                })
-                .catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Another error: ', err)
-                    }
-                })
+                    .catch(err => {
+                        if (err.name !== 'AbortError') {
+                            console.error('Another error: ', err)
+                        }
+                    })
+                // Hide the search bar loading
+                showSearchBarLoading.value = false
+            }, 1000); // delay of 1 second
         })
 
 
@@ -177,9 +295,7 @@ createApp({
             var placeTitle
             fetch(apiURL + 'external', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ url: url })
             })
                 .then(response => response.text())
@@ -235,6 +351,7 @@ createApp({
             }
             currentLocationMarker.value = L.marker([Number(currentLocation.value.lat), Number(currentLocation.value.lon)])
             currentLocationMarker.value.addTo(map.value)
+            currentLocationMarker.value.bindPopup(currentLocation.value.name).openPopup()
         }
 
         function fitCurrentLocationBounds() {
@@ -248,6 +365,7 @@ createApp({
         }
 
         function updateOffCanvasStatistics() {
+            currentLocation.value.address.date = dateFilter.value
             fetch(apiURL + 'crimes/statistics', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -265,8 +383,11 @@ createApp({
             query, 
             recommendations,
             barFocus,
+            showLoading,
+            showSearchBarLoading,
             currentLocation,
             statistics,
+            dateFilter,
             selectSearchBarItem,
         }
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Crime;
+namespace App\Http\Requests\Report;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StatisticsCrimeRequest extends FormRequest
+class ByCrimeReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,6 @@ class StatisticsCrimeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'suburb' => 'string',
-            'city' => 'string',
-            'municipality' => 'string',
-            'state' => 'string',
-            'region' => 'string',
-            'country' => 'required|string',
             'date' => 'required|string|date',
         ];
     }
