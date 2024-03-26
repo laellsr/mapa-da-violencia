@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Report\ByCrimeReportRequest;
 use App\Http\Requests\Report\StoreReportRequest;
 use App\Models\Crime;
 use App\Models\Report;
+use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -22,11 +24,15 @@ class ReportController extends Controller
      /**
      * Display a listing of the resource by crimes.
      */
-    public function index_by_crimes()
+    public function index_by_crimes(ByCrimeReportRequest $request)
     {
-        $crimes = Crime::has('reports')
-        ->with(['reports' => function($query) {
-            $query->select('crime_id', 'lat', 'lon');        
+        $date = $request->date;
+
+        $crimes = Crime::whereHas('reports', function ($query) use ($date) {
+            $query->whereDate('date','>=', $date);
+        })->with(['reports' => function ($query) use ($date) {
+            $query->whereDate('date', '>=', $date)
+            ->select('crime_id', 'lat', 'lon');   
         }])->get();
 
         return response()->json($crimes, 200);

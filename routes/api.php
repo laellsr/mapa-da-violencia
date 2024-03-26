@@ -25,7 +25,7 @@ Route::prefix('reports')->group(function () {
     Route::controller(ReportController::class)->group(function (){
         Route::get('/', 'index');
         Route::post('/store', 'store');
-        Route::get('/crimes', 'index_by_crimes');
+        Route::post('/crimes', 'index_by_crimes');
     });
 });
 

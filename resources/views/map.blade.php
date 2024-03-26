@@ -28,6 +28,12 @@
                     </defs>
                 </svg> 
             </button>
+            <div v-show="showLoading" id="loadingSpinner" class="bg-white rounded shadow-sm border border-dark row justify-content-center align-items-center text-center">
+                <div class="col">
+                    <span class="spinner-border text-dark"></span>
+                    <p class="m-0" role="status">Carregando...</p>
+                </div>
+            </div>
         </div>
     </div>
     @include('_report-modal')

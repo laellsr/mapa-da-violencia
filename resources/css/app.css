@@ -2,6 +2,19 @@
     --bg-main-color: linear-gradient(304deg, rgba(31,26,57,1) 0%, rgba(55,53,72,1) 43%);
 }
 
+#loadingSpinner {
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    width: 200px;
+    height: 150px;
+}
+
+#loadingSpinner span {
+    width: 3rem;
+    height: 3rem;
+}
+
 #map { 
     height: 100%;
     width: 100%; 
@@ -73,4 +86,9 @@ input:focus {
 
 #map > div.leaflet-control-container > div.leaflet-top.leaflet-right > div {
     padding: 0.7rem;
+}
+
+#datePickerContainer {
+    padding: 0.7rem;
+    width: 200px;
 }

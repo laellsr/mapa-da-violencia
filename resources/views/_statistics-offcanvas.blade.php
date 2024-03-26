@@ -9,6 +9,83 @@
             <small class="text-black-50 mb-3" v-html="currentLocation.display_name"></small>
             <p class="mt-3" v-html="statistics.comparison"></p>
             <p class="mb-3">@{{ 'Ao todo, pela manhã foram registrada(s) ' + statistics.morningReports + ' ocorrências, à tarde ' + statistics.afternoonReports + ', à noite ' + statistics.nightReports + ' e na madrugada ' + statistics.dawnReports + '.' }}</p>
+
+            <!-- Para comparação de bairros -->
+            <div v-if="statistics.suburb_comparison">
+                <h6 class="fs-6">Comparação de Bairros</h6>
+                <table class="table table-sm align-middle text-center" style="font-size: 14px;">
+                    <thead>
+                        <tr>
+                            <th>Bairro</th>
+                            <th>Ocorrências</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in statistics.suburb_comparison" :key="item.suburb">
+                            <td>@{{ item.suburb }}</td>
+                            <td>@{{ item.crime_count }}</td>
+                        </tr>
+                    </tbody>    
+                </table>
+            </div>
+
+            <!-- Para comparação de cidades -->
+            <div v-if="statistics.city_comparison">
+                <h6 class="fs-6">Comparação de Cidades</h6>
+                <table class="table table-sm align-middle text-center" style="font-size: 14px;">
+                    <thead>
+                        <tr>
+                            <th>Cidade</th>
+                            <th>Ocorrências</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in statistics.city_comparison" :key="item.city">
+                            <td>@{{ item.city }}</td>
+                            <td>@{{ item.crime_count }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Para comparação de estados -->
+            <div v-if="statistics.state_comparison">
+                <h6 class="fs-6">Comparação de Estados</h6>
+                <table class="table table-sm align-middle text-center" style="font-size: 14px;">
+                    <thead>
+                        <tr>
+                            <th>Estado</th>
+                            <th>Ocorrências</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in statistics.state_comparison" :key="item.state">
+                            <td>@{{ item.state }}</td>
+                            <td>@{{ item.crime_count }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div v-if="statistics.region_comparison">
+                <!-- Para comparação de regiões -->
+                <h6 class="fs-6">Comparação de Regiões</h6>
+                <table class="table table-sm align-middle text-center" style="font-size: 14px;">
+                    <thead>
+                        <tr>
+                            <th>Região</th>
+                            <th>Ocorrências</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in statistics.region_comparison" :key="item.region">
+                            <td>@{{ item.region_comparison }}</td>
+                            <td>@{{ item.crime_count }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <p class="mb-4">@{{ ' A tabela abaixo detalha quais foram as ocorrência(s) para ' + statistics.placeReport + '.' }}</p>
             <table v-if="statistics.crimes" class="table table-sm align-middle text-center" style="font-size: 14px;">
                 <thead>

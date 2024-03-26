@@ -9,7 +9,7 @@ export async function createIcons(apiUrl){
         i++;
     });
     i=0
-    console.log(crimeColorsDict)
+    // console.log(crimeColorsDict)
     return crimeColorsDict;
     
     // var medium_risk = L.icon({
