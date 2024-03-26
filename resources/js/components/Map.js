@@ -114,6 +114,19 @@ createApp({
                 return new L.Control.DatePicker(opts)
             }
             L.control.datepicker({ position: 'topright' }).addTo(map.value)
+            // Add the gradient bar control
+            // L.Control.GradientBar = L.Control.extend({
+            //     onAdd: function(map) {
+            //         var container = L.DomUtil.create('div');
+            //         container.id = "gradientBarContainer"
+            //         var gradientBar = L.DomUtil.create('div', '', container);
+            //         gradientBar.className = "gradient-bar";
+            //         L.DomEvent.disableClickPropagation(gradientBar);
+            //         return gradientBar;
+            //     }
+            // });
+            // var gradientBar = new L.Control.GradientBar({ position: 'topright' });
+            // gradientBar.addTo(map.value);
             // Add the layers control
             var baseMaps = {
                 '<input type="date">': layerCustomDate,
