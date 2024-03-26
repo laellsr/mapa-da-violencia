@@ -115,3 +115,22 @@ input:focus {
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
     z-index: 1;
 } */
+
+.form-select:focus {
+    border-color: black;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(0 0 0 / 25%);
+}
+
+.form-control:focus {
+    border-color: black;
+}
+
+input:-internal-autofill-selected {
+    background-color: rgba(0, 0, 0, 0.322) !important;
+}
+
+.form-check-input:checked {
+    background-color: black;
+    border-color: black;
+}
