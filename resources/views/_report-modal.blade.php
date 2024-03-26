@@ -1,7 +1,7 @@
 
 <div id="modalApp">
     <div id="reportModal" class="modal fade" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered text-white">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom-0">
                     <label class="modal-title fs-4">Denuncie um crime!</label>
@@ -39,7 +39,7 @@
                         </label>
                     </div>
                     <div class="d-grid mt-4">
-                        <button id="btnReportSubmit" type="submit" class="btn btn-lg btn-primary">Registrar</button>
+                        <button id="btnReportSubmit" type="submit" class="btn btn-lg btn-dark">Registrar</button>
                     </div>
                 </form>
             </div>

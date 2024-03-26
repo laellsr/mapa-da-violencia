@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-mzXu57nv.css",
+    "file": "assets/app-Dxbxa2wh.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -13,6 +13,14 @@
     "file": "assets/reportModal-0gh2B_2J.css",
     "isEntry": true,
     "src": "resources/css/reportModal.css"
+  },
+  "resources/img/cover.webp": {
+    "file": "assets/cover-WCzJasis.webp",
+    "src": "resources/img/cover.webp"
+  },
+  "resources/img/cover2.webp": {
+    "file": "assets/cover2-oKy21UII.webp",
+    "src": "resources/img/cover2.webp"
   },
   "resources/img/gun.png": {
     "file": "assets/gun-e6pOFlTz.png",

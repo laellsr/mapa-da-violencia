@@ -80,9 +80,9 @@ input:focus {
     pointer-events: none;
 }
 
-.modal-content {
+/* .modal-content {
     background: var(--bg-main-color);
-}
+} */
 
 #map > div.leaflet-control-container > div.leaflet-top.leaflet-right > div {
     padding: 0.7rem;
