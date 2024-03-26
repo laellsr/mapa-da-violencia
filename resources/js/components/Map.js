@@ -32,6 +32,7 @@ createApp({
         const controlLayers = ref({})
         const heatLayer = ref([])
         const heatmap = ref({})
+        const heatmapGradientBar = ref(true)
         
         /* App Data */
         const currentLocation = ref({})
@@ -157,6 +158,7 @@ createApp({
                     }
                     heatmap.value.setLatLngs([])
                     high = true
+                    heatmapGradientBar.value = false
                 } else if (currentZoomLevel < markerDisplayZoomLevel && high) {
                     // If the zoom level is too low, remove the markers
                     for (let layerName in overlayLayers.value) {
@@ -164,6 +166,7 @@ createApp({
                     }
                     heatmap.value.setLatLngs(heatLayer.value)
                     high = false
+                    heatmapGradientBar.value = true
                 }
             })
             hideLoadingContainer()
@@ -398,6 +401,7 @@ createApp({
             barFocus,
             showLoading,
             showSearchBarLoading,
+            heatmapGradientBar,
             currentLocation,
             statistics,
             dateFilter,

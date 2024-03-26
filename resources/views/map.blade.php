@@ -34,7 +34,7 @@
                     <p class="m-0" role="status">Carregando...</p>
                 </div>
             </div>
-            <div class="gradient-bar-conteiner text-center">
+            <div v-show="heatmapGradientBar" class="gradient-bar-conteiner text-center">
                 {{-- bg-white p-1 px-2 rounded shadow-sm border border-dark-50 --}}
                 <small class="mb-1">Intensidade da gravidade de ocorrências</small>
                 <div class="gradient-bar mb-1 rounded"></div>
