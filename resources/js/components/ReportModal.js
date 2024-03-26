@@ -54,7 +54,7 @@ createApp({
                         let info = element.display_name.substring(commaIndex + 1).trim()
                         let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
                         recommendations.value.push({
-                            display: `${query.value} <span class="text-white-50 fst-italic">- ${info}${postcode}</span>`,
+                            display: `${query.value} <span class="text-secondary fst-italic">- ${info}${postcode}</span>`,
                             element: element
                         })
                     })
@@ -88,7 +88,7 @@ createApp({
                 .then(data => {
                     recommendations.value = []
                     recommendations.value.push({
-                        display: `${placeTitle} <span class="text-white-50 fst-italic">- ${data.display_name}</span>`,
+                        display: `${placeTitle} <span class="text-dark-50 fst-italic">- ${data.display_name}</span>`,
                         element: data
                     })
                     reportPlace.value = data
