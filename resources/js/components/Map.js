@@ -277,7 +277,7 @@ createApp({
             }
             // Clear the previous timeout if there is one
             if (timeoutId) {
-                clearTimeout(timeoutId);
+                clearTimeout(timeoutId)
             }
             // Set a new timeout
             timeoutId = setTimeout(() => {

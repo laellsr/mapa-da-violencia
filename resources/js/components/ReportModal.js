@@ -31,6 +31,8 @@ createApp({
                 })
                 .catch(err => console.log(err))
         })
+        
+        let timeoutId = null
 
         watch(query, (newVal) => {
             // Abort the previous request
@@ -43,28 +45,36 @@ createApp({
                 setExternalSearch(newVal, signal)
                 return
             }
-            // Make a new request
-            fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
-                .then(response => response.json())
-                .then(data => {
-                    recommendations.value = []
-                    recommendationsSourceData.value = data // Used to fit the map
-                    data.forEach( element => {
-                        let commaIndex = element.display_name.indexOf(',')
-                        let info = element.display_name.substring(commaIndex + 1).trim()
-                        let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
-                        recommendations.value.push({
-                            display: `${query.value} <span class="text-secondary fst-italic">- ${info}${postcode}</span>`,
-                            element: element
+
+            // Clear the previous timeout if there is one
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            // Set a new timeout
+            timeoutId = setTimeout(() => {
+                // Make a new request
+                fetch('https://nominatim.openstreetmap.org/search.php?q=' + encodeURI(newVal) + '&format=jsonv2&addressdetails=1&polygon_geojson=1', { signal })
+                    .then(response => response.json())
+                    .then(data => {
+                        recommendations.value = []
+                        recommendationsSourceData.value = data // Used to fit the map
+                        data.forEach( element => {
+                            let commaIndex = element.display_name.indexOf(',')
+                            let info = element.display_name.substring(commaIndex + 1).trim()
+                            let postcode = (element.address.postcode !== undefined) ? ` - ${element.address.postcode}` : ''
+                            recommendations.value.push({
+                                display: `${query.value} <span class="text-secondary fst-italic">- ${info}${postcode}</span>`,
+                                element: element
+                            })
                         })
+                        reportPlace.value = data[0]
                     })
-                    reportPlace.value = data[0]
-                })
-                .catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Another error: ', err)
-                    }
-                })
+                    .catch(err => {
+                        if (err.name !== 'AbortError') {
+                            console.error('Another error: ', err)
+                        }
+                    })
+            }, 1000); // delay of 1 second
         })
 
         function setExternalSearch(url, signal) {
@@ -121,6 +131,15 @@ createApp({
             })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.errors) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Falta algo!",
+                            text: 'Lembre-se de colocar o endereço a partir da rua. Ex.: Rua Azuzinha, 12, <bairro>...',
+                        });
+                        document.getElementById('btnReportSubmit').removeAttribute('disabled')
+                        return
+                    }
                     Swal.fire({
                         icon: "success",
                         title: "Feito!",

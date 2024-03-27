@@ -26,20 +26,20 @@ return new class extends Migration
             $table->timestamps();
             // Suburb
             $table->string('suburb');
-            $table->enum('suburb_osm_type',  $osm_types_enum);
-            $table->BigInteger('suburb_osm_id');
+            $table->enum('suburb_osm_type',  $osm_types_enum)->nullable();
+            $table->BigInteger('suburb_osm_id')->nullable();
             // City
             $table->string('city');
-            $table->enum('city_osm_type',  $osm_types_enum);
-            $table->BigInteger('city_osm_id');
+            $table->enum('city_osm_type',  $osm_types_enum)->nullable();
+            $table->BigInteger('city_osm_id')->nullable();
             // State
             $table->string('state');
-            $table->enum('state_osm_type',  $osm_types_enum);
-            $table->BigInteger('state_osm_id');
+            $table->enum('state_osm_type',  $osm_types_enum)->nullable();
+            $table->BigInteger('state_osm_id')->nullable();
             // Region
             $table->string('region');
-            $table->enum('region_osm_type',  $osm_types_enum);
-            $table->BigInteger('region_osm_id');
+            $table->enum('region_osm_type',  $osm_types_enum)->nullable();
+            $table->BigInteger('region_osm_id')->nullable();
             // Country
             $table->string('country');
         });
