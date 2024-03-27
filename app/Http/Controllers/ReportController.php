@@ -56,41 +56,46 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
+        if ($request->osm_type != 'way') {
+            return response()->json(['errors' => 'Adicione uma rua. Não se pode colocar apenas o nome do bairro, cidade ou país.'], 400);
+        }
         $osm_type = $this->get_osm_type_enum($request->osm_type);
 
-        $client = new Client();
+        // pode ser bloqueado pelo servidor
 
-        $url = 'https://nominatim.openstreetmap.org/details.php?osmtype=' . $osm_type . '&osmid=' . $request->osm_id . '&addressdetails=1&format=json';
+        // $client = new Client();
 
-        $response = $client->request('GET', $url);
+        // $url = 'https://nominatim.openstreetmap.org/details?osmtype=' . $osm_type . '&osmid=' . $request->osm_id . '&addressdetails=1&format=json';
 
-        $data = json_decode($response->getBody(), true);
+        // $response = $client->request('GET', $url);
 
-        $reportPlaceData = [
-            $request->suburb => [
-                'osm_type' => '',
-                'osm_id' => '',
-            ],
-            $request->city => [
-                'osm_type' => '',
-                'osm_id' => '',
-            ],
-            $request->state => [
-                'osm_type' => '',
-                'osm_id' => '',
-            ],
-            $request->region => [
-                'osm_type' => '',
-                'osm_id' => '',
-            ]
-        ];
+        // $data = json_decode($response->getBody(), true);
+
+        // $reportPlaceData = [
+        //     $request->suburb => [
+        //         'osm_type' => '',
+        //         'osm_id' => '',
+        //     ],
+        //     $request->city => [
+        //         'osm_type' => '',
+        //         'osm_id' => '',
+        //     ],
+        //     $request->state => [
+        //         'osm_type' => '',
+        //         'osm_id' => '',
+        //     ],
+        //     $request->region => [
+        //         'osm_type' => '',
+        //         'osm_id' => '',
+        //     ]
+        // ];
     
-        foreach ($data['address'] as $address) {
-            if($address['class'] == 'boundary' && array_key_exists($address['localname'], $reportPlaceData)) {
-                $reportPlaceData[$address['localname']]['osm_type'] = $address['osm_type'];
-                $reportPlaceData[$address['localname']]['osm_id'] = $address['osm_id'];
-            }
-        }
+        // foreach ($data['address'] as $address) {
+        //     if($address['class'] == 'boundary' && array_key_exists($address['localname'], $reportPlaceData)) {
+        //         $reportPlaceData[$address['localname']]['osm_type'] = $address['osm_type'];
+        //         $reportPlaceData[$address['localname']]['osm_id'] = $address['osm_id'];
+        //     }
+        // }
 
         $report = Report::create([
             'crime_id' => $request->crime_id,
@@ -101,17 +106,17 @@ class ReportController extends Controller
             'date' => $request->date,
             'time' => $request->time,
             'suburb' => $request->suburb,
-            'suburb_osm_type' => $reportPlaceData[$request->suburb]['osm_type'],
-            'suburb_osm_id' => $reportPlaceData[$request->suburb]['osm_id'],
+            // 'suburb_osm_type' => $reportPlaceData[$request->suburb]['osm_type'],
+            // 'suburb_osm_id' => $reportPlaceData[$request->suburb]['osm_id'],
             'city' => $request->city,
-            'city_osm_type' => $reportPlaceData[$request->city]['osm_type'],
-            'city_osm_id' => $reportPlaceData[$request->city]['osm_id'],
+            // 'city_osm_type' => $reportPlaceData[$request->city]['osm_type'],
+            // 'city_osm_id' => $reportPlaceData[$request->city]['osm_id'],
             'state' => $request->state,
-            'state_osm_type' => $reportPlaceData[$request->state]['osm_type'],
-            'state_osm_id' => $reportPlaceData[$request->state]['osm_id'],
+            // 'state_osm_type' => $reportPlaceData[$request->state]['osm_type'],
+            // 'state_osm_id' => $reportPlaceData[$request->state]['osm_id'],
             'region' => $request->region,
-            'region_osm_type' => $reportPlaceData[$request->region]['osm_type'],
-            'region_osm_id' => $reportPlaceData[$request->region]['osm_id'],
+            // 'region_osm_type' => $reportPlaceData[$request->region]['osm_type'],
+            // 'region_osm_id' => $reportPlaceData[$request->region]['osm_id'],
             'country' => $request->country,
         ]);
         
